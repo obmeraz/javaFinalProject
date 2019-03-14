@@ -1,0 +1,144 @@
+/*Navbar height*/
+.navbar {
+    height: 70px;
+}
+
+.navbar-brand {
+    padding: 0 15px;
+    height: 80px;
+    line-height: 80px;
+}
+
+.navbar-toggle {
+    margin-top: 23px;
+    padding: 9px 10px !important;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav > li > a {
+        padding-top: 26.5px;
+        padding-bottom: 26.5px;
+        line-height: 27px;
+    }
+}
+
+/*Banner size on main page*/
+
+.banner {
+    margin-top: 60px;
+}
+
+/*Cards with lifehacks*/
+
+.cards-body {
+        background-image: url("/LifehackWeb_war_exploded/img/leaves.png");
+}
+
+.card-body {
+    padding-left: 35px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.card-img {
+    width: 300px;
+    height: 150px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.cards {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.card {
+    max-width: 75%;
+    border-radius: 20px;
+}
+
+.card-title {
+        text-overflow: ellipsis;
+}
+
+.chapter-header {
+    background-color: #333;
+}
+
+.no-gutters {
+    height: 150px;
+}
+
+/*Footer*/
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+header {
+    height: 50px;
+}
+
+footer {
+    height: 50px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+}
+
+/*Categories list*/
+#category-list {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+#custom-list-item {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-radius: 20px;
+}
+
+/*Login*/
+#login {
+    margin-top: 110px;
+}
+
+#login-body {
+    width: 400px;
+    height: 300px;
+}
+
+#login-email,
+#login-password {
+    height: 50px;
+}
+
+/*Sign up*/
+#sign-up {
+    margin-top: 80px;
+}
+
+#sign-up-body {
+    width: 650px;
+    height: 700px;
+}
+
+/*User-page*/
+#user-card {
+    width: 550px;
+}
+
+.classlike:hover{
+    cursor: pointer;
+}
