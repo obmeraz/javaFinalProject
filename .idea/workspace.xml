@@ -6,56 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ad6b3ea7-3e57-4927-b45e-d7ba21898339" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/command/AttributeConstant.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/command/AttributeConstant.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/command/CommandType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/command/CommandType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/controller/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/dao/CommentDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/dao/CommentDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/dao/Dao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/dao/Dao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/dao/LifeHackDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/dao/LifeHackDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/dao/UserDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/dao/UserDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/dao/impl/CommentDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/dao/impl/CommentDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/dao/impl/LifeHackDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/dao/impl/LifeHackDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/dao/impl/UserDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/dao/impl/UserDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/entity/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/filter/CurrentPageFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/filter/CurrentPageFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/pool/ConnectionPool.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/pool/ConnectionPool.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/pool/ProxyConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/pool/ProxyConnection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/service/CommentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/service/CommentService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/service/LifeHackService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/service/LifeHackService$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/service/LifeHackService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/service/LifeHackService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/util/CommentValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/util/CommentValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/util/LifeHackValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/util/LifeHackValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/util/UserValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/by/zarembo/project/util/UserValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/log4j2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/mail.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/WEB-INF/classes/mail.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/jsp/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/LifehackWeb_war_exploded/jsp/header.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/command/AttributeConstant.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/command/AttributeConstant.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/command/CommandType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/command/CommandType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/controller/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/dao/CommentDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/dao/CommentDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/dao/Dao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/dao/Dao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/dao/LifeHackDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/dao/LifeHackDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/dao/UserDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/dao/UserDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/dao/impl/CommentDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/dao/impl/CommentDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/dao/impl/LifeHackDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/dao/impl/LifeHackDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/dao/impl/UserDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/dao/impl/UserDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/entity/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/filter/CurrentPageFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/filter/CurrentPageFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/pool/ConnectionPool.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/pool/ConnectionPool.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/pool/ProxyConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/pool/ProxyConnection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/service/CommentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/service/CommentService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/service/LifeHackService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/service/LifeHackService$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/service/LifeHackService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/service/LifeHackService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/util/CommentValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/util/CommentValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/util/LifeHackValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/util/LifeHackValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/util/UserValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/by/zarembo/project/util/UserValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/log4j2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LifehackWeb/mail.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifehackWeb/mail.properties" afterDir="false" />
-    </list>
+    <list default="true" id="ad6b3ea7-3e57-4927-b45e-d7ba21898339" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -377,10 +328,10 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552569158085" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552588480839" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last.edited.regexp" value="Мобильная игра в стиле киберпанк для всех поклонников одноимённого фильма" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/testgit/javaFinalProject" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -574,7 +525,7 @@
       <workItem from="1552546686289" duration="5160000" />
       <workItem from="1552555048290" duration="1369000" />
       <workItem from="1552558318499" duration="8276000" />
-      <workItem from="1552580771304" duration="5063000" />
+      <workItem from="1552580771304" duration="5777000" />
     </task>
     <task id="LOCAL-00001" summary="a little clean up">
       <created>1551797259900</created>
@@ -629,7 +580,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="536416000" />
+    <option name="totallyTimeSpent" value="537130000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
