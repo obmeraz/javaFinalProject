@@ -56,7 +56,7 @@ public class DisplayLifeHacksByTypeCommand implements Command {
                 router.setRedirectRoute();
                 return router;
             }
-            int numberOfPages = lifeHackService.getNumberOfPages(lifeHacks);
+            int numberOfPages = lifeHackService.getNumberOfPages(type, category, user);
             request.setAttribute(NUMBER_OF_PAGES, numberOfPages);
             request.setAttribute(CURRENT_PAGE, currentPage);
             request.setAttribute(TYPE, type);

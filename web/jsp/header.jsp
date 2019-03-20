@@ -8,12 +8,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="ctg" uri="customtags" %>
+<%@ taglib prefix="adt" uri="customtags" %>
+
 <fmt:setLocale value="${sessionScope.language}" scope="session"/>
 <fmt:setBundle basename="i18n.message" var="locale"/>
 <fmt:message bundle="${locale}" key="header.recent" var="recent"/>
 <fmt:message bundle="${locale}" key="header.popular" var="popular"/>
 <fmt:message bundle="${locale}" key="header.category" var="category"/>
+<fmt:message bundle="${locale}" key="header.login" var="login"/>
+<fmt:message bundle="${locale}" key="header.language" var="language"/>
+<fmt:message bundle="${locale}" key="header.signup" var="sign_up"/>
+<fmt:message bundle="${locale}" key="header.admin_panel" var="admin_panel"/>
+<fmt:message bundle="${locale}" key="header.language.en" var="english"/>
+<fmt:message bundle="${locale}" key="header.language.ru" var="russian"/>
+<fmt:message bundle="${locale}" key="header.homepage" var="homepage"/>
+<fmt:message bundle="${locale}" key="header.logout" var="logout"/>
 
 <!DOCTYPE html>
 <html>
@@ -57,9 +66,6 @@
                 <a class="nav-link"
                    href="${pageContext.request.contextPath}/controller?command=choose_lifehack_category">${category}</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-            </li>
         </ul>
 
         <c:if test="${(sessionScope.role eq 'ADMIN') or (sessionScope.role eq 'USER')}">
@@ -69,26 +75,28 @@
                         ${sessionScope.user.firstName}
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="${pageContext.request.contextPath}/jsp/user/user.jsp">Homepage</a>
-                    <a class="dropdown-item" href="${pageContext.request.contextPath}/controller?command=log_out">Log
-                        out</a>
+                    <a class="dropdown-item" href="${pageContext.request.contextPath}/jsp/user/user.jsp">${homepage}</a>
+                    <a class="dropdown-item"
+                       href="${pageContext.request.contextPath}/controller?command=log_out">${logout}</a>
                 </div>
             </div>
         </c:if>
 
-        <c:if test="${sessionScope.role eq 'ADMIN'}">
+        <adt:admin role="${sessionScope.role}">
             <div class="mr-3">
-                <a href="${pageContext.request.contextPath}/jsp/admin/admin.jsp" class="btn btn-warning">Admin panel</a>
+                <a href="${pageContext.request.contextPath}/jsp/admin/admin.jsp"
+                   class="btn btn-warning">${admin_panel}</a>
             </div>
-        </c:if>
+        </adt:admin>
 
         <c:if test="${sessionScope.role eq 'GUEST'}">
             <div class="mr-3">
-                <a href="${pageContext.request.contextPath}/jsp/guest/login.jsp" class="btn btn-primary">Log in</a>
+                <a href="${pageContext.request.contextPath}/jsp/guest/login.jsp" class="btn btn-primary">${login}</a>
             </div>
 
             <div class="mr-3">
-                <a href="${pageContext.request.contextPath}/jsp/guest/sign_up.jsp" class="btn btn-primary">Sign up</a>
+                <a href="${pageContext.request.contextPath}/jsp/guest/sign_up.jsp"
+                   class="btn btn-primary">${sign_up}</a>
             </div>
         </c:if>
 
@@ -96,12 +104,12 @@
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">Language</a>
+                       aria-haspopup="true" aria-expanded="false">${language}</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
                         <a class="dropdown-item"
-                           href="${pageContext.request.contextPath}/controller?session_locale=en&command=locale">English</a>
+                           href="${pageContext.request.contextPath}/controller?session_locale=en&command=locale">${english}</a>
                         <a class="dropdown-item"
-                           href="${pageContext.request.contextPath}/controller?session_locale=ru&command=locale">Russian</a>
+                           href="${pageContext.request.contextPath}/controller?session_locale=ru&command=locale">${russian}</a>
                     </div>
                 </li>
             </ul>

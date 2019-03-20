@@ -6,11 +6,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
-<head>
 
+<fmt:setLocale value="${sessionScope.language}" scope="session"/>
+<fmt:setBundle basename="i18n.message" var="locale"/>
+<fmt:message bundle="${locale}" key="lifehack_post.comments" var="commentsName"/>
+<fmt:message bundle="${locale}" key="lifehack_post.date" var="publicationName"/>
+<fmt:message bundle="${locale}" key="lifehack_post.edit" var="editButton"/>
+<fmt:message bundle="${locale}" key="lifehack_post.sort" var="sortCommentsName"/>
+<fmt:message bundle="${locale}" key="lifehack_post.send" var="sendButton"/>
+<fmt:message bundle="${locale}" key="lifehack_post.sort.date" var="byDate"/>
+<fmt:message bundle="${locale}" key="lifehack_post.sort.likes" var="byLikes"/>
+
+<head>
 
     <title>
         Лайфхакер
@@ -27,7 +37,12 @@
             <div class="card  text-center">
                 <img src="data:image/jpg;base64,${lifehack.image}" class="card-img-top" alt="...">
                 <div class="card-body" style="width: 830px; height: auto; white-space: normal">
-                    <h5 class="card-title">${lifehack.name}</h5>
+                    <h5 class="card-title">${lifehack.name} <c:if test="${sessionScope.user.role eq 'ADMIN'}">
+                                <span class="badge badge-danger">  <a class="text-light"
+                                                                      href="${pageContext.request.contextPath}/controller?command=edit_lifehack&name=${lifehack.name}&lifehack_id=${lifehack.lifehackId}"
+                                                                      style="text-decoration:none">
+                                        ${editButton}</a></span>
+                    </c:if></h5>
                     <p class="card-text">${lifehack.content}</p>
                 </div>
 
@@ -38,8 +53,8 @@
                             <jsp:useBean id="dataValue" class="java.util.Date"/>
                             <jsp:setProperty name="dateValue" property="time"
                                              value="${lifehack.publicationDate}"/>
-                            <small class="text-muted">Publication date <fmt:formatDate value="${dateValue}"
-                                                                                       pattern="MM/dd/yyyy HH:mm:ss"/>
+                            <small class="text-muted">${publicationName} <fmt:formatDate value="${dateValue}"
+                                                                                         pattern="MM/dd/yyyy HH:mm:ss"/>
                                 <c:if test="${(sessionScope.user.role eq 'USER') or (sessionScope.user.role eq 'ADMIN')}">
                                     <c:if test="${liked ne true}">
                                         <img src="${pageContext.request.contextPath}/img/heart.png" id="likeLifehack"
@@ -55,12 +70,7 @@
                                         <h6>${lifehack.likesAmount}</h6>
                                     </div>
                                 </c:if>
-                                <c:if test="${sessionScope.user.role eq 'ADMIN'}">
-                                <span class="badge badge-danger">  <a class="text-light"
-                                                                      href="${pageContext.request.contextPath}/controller?command=edit_lifehack&name=${lifehack.name}&lifehack_id=${lifehack.lifehackId}"
-                                                                      style="text-decoration:none">
-                                   EDIT</a></span>
-                                </c:if>
+
                             </small>
                         </p>
                     </div>
@@ -81,7 +91,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-
+            <c:set var="errorMessages" value="" scope="session"/>
         </c:if>
 
         <c:if test="${sessionScope.role eq 'ADMIN' or sessionScope.role eq 'USER'}">
@@ -90,27 +100,25 @@
                       method="POST">
                     <input type="hidden" name="command" value="leave_comment">
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Комментарии</label>
+                        <label for="exampleFormControlTextarea1">${commentsName}</label>
                         <textarea name="comment_content" class="form-control mb-3" id="exampleFormControlTextarea1"
                                   rows="4" maxlength="255"
                                   required></textarea>
                     </div>
-                    <button class="btn btn-danger" type="submit">Send</button>
+                    <button class="btn btn-danger" type="submit">${sendButton}</button>
                 </form>
 
 
                 <div class="btn-group">
                     <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                        Sort comments
+                            ${sortCommentsName}
                     </button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item"
-                           href="${pageContext.request.contextPath}/controller?command=sort_comments&lifehack_id=${lifehack.lifehackId}&sort_type=sort_by_likes">By
-                            likes</a>
+                           href="${pageContext.request.contextPath}/controller?command=sort_comments&lifehack_id=${lifehack.lifehackId}&sort_type=sort_by_likes">${byLikes}</a>
                         <a class="dropdown-item"
-                           href="${pageContext.request.contextPath}/controller?command=sort_comments&lifehack_id=${lifehack.lifehackId}&sort_type=sort_by_date">By
-                            date</a>
+                           href="${pageContext.request.contextPath}/controller?command=sort_comments&lifehack_id=${lifehack.lifehackId}&sort_type=sort_by_date">${byDate}</a>
                     </div>
                 </div>
 

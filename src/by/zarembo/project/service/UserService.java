@@ -179,15 +179,4 @@ public class UserService {
             throw new ServiceException(e);
         }
     }
-
-    /*public List<LifeHack> takeUserLikeLifeHacks(long userId) throws ServiceException {
-        List<LifeHack> lifeHacks;
-        UserDaoImpl userDao = UserDaoImpl.getInstance();
-        try {
-            lifeHacks = userDao.findUserLikesLifeHacks(userId);
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-        return lifeHacks;
-    }*/
 }

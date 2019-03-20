@@ -39,7 +39,9 @@ public class LifeHackDaoImpl implements LifeHackDao {
             "excerpt,category_id,lifehack_likes_amount,picture FROM lifehacks JOIN users u on " +
             "lifehacks.author_user_id = u.user_id WHERE category_id=? LIMIT ?,?";
 
-    private static final String SQL_SELECT_ALL_CATEGORIES = "SELECT count(lifehack_id) as count_lifehacks,lifehacks.category_id,category_name FROM lifehacks JOIN categories ON lifehacks.category_id=categories.category_id\n" +
+    private static final String SQL_SELECT_COUNT_LIFEHACKS_CATEGORY = "select count(*) as lifehack_count from lifehacks join categories on lifehacks.category_id=categories.category_id where lifehacks.category_id=?";
+
+    private static final String SQL_SELECT_ALL_CATEGORIES = "SELECT count(lifehack_id) as count_lifehacks,categories.category_id,category_name FROM lifehacks RIGHT JOIN categories ON lifehacks.category_id=categories.category_id\n" +
             "GROUP BY category_id ORDER BY count_lifehacks DESC;";
 
     private static final String SQL_SELECT_POPULAR_LIFEHACKS = "SELECT u.user_id,role_id,firstname,lastname,nickname,email,password_hash, lifehack_id,author_user_id,lifehack_name,publication_date,lifehack_content,excerpt,category_id,lifehack_likes_amount,picture FROM lifehacks JOIN users u on lifehacks.author_user_id = u.user_id ORDER BY lifehack_likes_amount DESC LIMIT ?,?;";
@@ -282,6 +284,24 @@ public class LifeHackDaoImpl implements LifeHackDao {
             count = resultSet.getInt(USER_LIKES_COUNT);
         } catch (SQLException e) {
             throw new DaoException("can't check user like lifehack", e);
+        } finally {
+            ConnectionPool.getInstance().releaseConnection(connection);
+        }
+        return count;
+    }
+
+    public int findCategoriesLifeHacksCount(CategoryType categoryType) throws DaoException {
+        Connection connection = ConnectionPool.getInstance().takeConnection();
+        int count = 0;
+        int categoryId = categoryType.ordinal();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_COUNT_LIFEHACKS_CATEGORY)) {
+            preparedStatement.setInt(1, categoryId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                count = resultSet.getInt("lifehack_count");
+            }
+        } catch (SQLException e) {
+            throw new DaoException("SQL exception, can't find lifehack", e);
         } finally {
             ConnectionPool.getInstance().releaseConnection(connection);
         }

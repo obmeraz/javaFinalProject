@@ -2,7 +2,6 @@ package by.zarembo.project.service;
 
 import by.zarembo.project.dao.impl.LifeHackDaoImpl;
 import by.zarembo.project.dao.impl.UserDaoImpl;
-import by.zarembo.project.entity.Comment;
 import by.zarembo.project.entity.LifeHack;
 import by.zarembo.project.entity.CategoryType;
 import by.zarembo.project.entity.User;
@@ -12,11 +11,9 @@ import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -83,6 +80,30 @@ public class LifeHackService {
         }
         return lifeHacks;
     }
+
+    public int takeLifeHacksUserLikesCount(long userId) throws ServiceException {
+        UserDaoImpl userDao = UserDaoImpl.getInstance();
+        int count;
+        try {
+            count = userDao.findUserLikesLifeHacksCount(userId);
+        } catch (DaoException e) {
+            throw new ServiceException("Can't take all lifehacks", e);
+        }
+        return count;
+    }
+
+    public int takeLifeHacksCategoryCount(CategoryType categoryType) throws ServiceException {
+        LifeHackDaoImpl lifeHackDao = LifeHackDaoImpl.getInstance();
+        List<LifeHack> lifeHacks;
+        int count;
+        try {
+            count = lifeHackDao.findCategoriesLifeHacksCount(categoryType);
+        } catch (DaoException e) {
+            throw new ServiceException("Can't take all lifehacks", e);
+        }
+        return count;
+    }
+
 
     public Map<CategoryType, Integer> takeCategories() throws ServiceException {
         LifeHackDaoImpl lifeHackDao = LifeHackDaoImpl.getInstance();
@@ -179,16 +200,6 @@ public class LifeHackService {
         }
     }
 
-   /* public void editLifeHackImage(String newImage, LifeHack lifeHack) throws ServiceException {
-        LifeHackDaoImpl lifeHackDao = LifeHackDaoImpl.getInstance();
-        lifeHack.setImageBytes(newImage);
-        try {
-            lifeHackDao.update(lifeHack);
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }*/
-
     public void editLifeHackCategory(String newCategory, LifeHack lifeHack) throws ServiceException {
         LifeHackDaoImpl lifeHackDao = LifeHackDaoImpl.getInstance();
         CategoryType categoryType = CategoryType.valueOf(newCategory.toUpperCase());
@@ -244,8 +255,19 @@ public class LifeHackService {
         return bytes;
     }
 
-    public int getNumberOfPages(List<LifeHack> lifeHacks) {
-        int rows = lifeHacks.size();
+    public int getNumberOfPages(String type, String category, User user) throws ServiceException {
+        List<LifeHack> lifeHackList = takeLifeHacksList();
+        int rows = 0;
+        if ("category".equals(type)) {
+            if (category != null) {
+                CategoryType categoryType = CategoryType.valueOf(category.toUpperCase());
+                rows = takeLifeHacksCategoryCount(categoryType);
+            }
+        } else if ("user_like".equals(type)) {
+            rows = takeLifeHacksUserLikesCount(user.getUserId());
+        } else {
+            rows = lifeHackList.size();
+        }
         int numberOfPages = rows / RECORDS_PER_PAGE;
         if (numberOfPages % RECORDS_PER_PAGE > 0) {
             numberOfPages++;

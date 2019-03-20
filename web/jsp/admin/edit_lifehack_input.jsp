@@ -6,11 +6,20 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${sessionScope.language}" scope="session"/>
+<fmt:setBundle basename="i18n.message" var="locale"/>
+<fmt:message bundle="${locale}" key="error" var="error"/>
+<fmt:message bundle="${locale}" key="edit_lifehack.pagename" var="edit_lifehack"/>
+<fmt:message bundle="${locale}" key="create_lifehack.name" var="name"/>
+<fmt:message bundle="${locale}" key="create_lifehack.content" var="content"/>
+<fmt:message bundle="${locale}" key="create_lifehack.category" var="category"/>
+<fmt:message bundle="${locale}" key="create_lifehack.excerpt" var="excerpt"/>
 <html>
 <head>
-    <title>Edit</title>
+    <title>${edit_lifehack}</title>
     <c:import url="../header.jsp"/>
 </head>
 <body>
@@ -18,12 +27,12 @@
     <div class="d-flex justify-content-center" id="sign-up" style="margin-bottom: 10px;">
         <div class="card text-center">
             <div class="card-header p-3 mb-2 bg-success text-white">
-                <h3>Edit lifehack</h3>
+                <h3>${edit_lifehack}</h3>
             </div>
             <div class="card-body" id="sign-up-body" style="height: auto;">
                 <c:if test="${not empty message}">
                     <div class="alert alert-danger alert-dismissible text-left" role="alert">
-                        <h4 class="alert-heading">Error!</h4>
+                        <h4 class="alert-heading">${error}!</h4>
                         <hr/>
                         <ul>
                                 <li>${message}</li>
@@ -40,7 +49,7 @@
                         <input type="hidden" name="command" value="edit_lifehack_name">
                         <input type="hidden" name="lifehack_id" value="${param.id}">
                         <div class="form-group mb-5">
-                            <label for="exampleFormControlInput1">Название лайфхака</label>
+                            <label for="exampleFormControlInput1">${name}</label>
                             <input type="text" name="new_name"<%-- pattern="^[а-яА-ЯёЁa-zA-Z\d\s«»:,!?]{1,100}$"--%>
                                    class="form-control" maxlength="100" id="exampleFormControlInput1" placeholder="Название лайфхак"
                                    required>
@@ -54,7 +63,7 @@
                         <input type="hidden" name="command" value="edit_lifehack_excerpt">
                         <input type="hidden" name="lifehack_id" value="${param.id}">
                         <div class="form-group mb-5">
-                            <label for="exampleFormControlInput2">Цитата</label>
+                            <label for="exampleFormControlInput2">${excerpt}</label>
                             <input type="text" name="new_excerpt" pattern="^[а-яА-ЯёЁa-zA-Z\d\s«»:,!?.+]{1,100}$"
                                    class="form-control" maxlength="60" id="exampleFormControlInput2" placeholder="Цитата"
                                    required>
@@ -68,7 +77,7 @@
                         <input type="hidden" name="command" value="edit_lifehack_content">
                         <input type="hidden" name="lifehack_id" value="${param.id}">
                         <div class="form-group mb-5">
-                            <label for="exampleFormControlTextarea1">Контент</label>
+                            <label for="exampleFormControlTextarea1">${content}</label>
                             <textarea name="new_content" class="form-control" id="exampleFormControlTextarea1"
                                       rows="5" cols="5" required></textarea>
                         </div>
@@ -82,7 +91,7 @@
                         <input type="hidden" name="lifehack_id" value="${param.id}">
 
                         <div class="form-group mb-5">
-                            <label for="exampleFormControlSelect1">Категория</label>
+                            <label for="exampleFormControlSelect1">${category}</label>
                             <select class="form-control" name="new_category" id="exampleFormControlSelect1" required>
                                 <option>Sport</option>
                                 <option>Education</option>

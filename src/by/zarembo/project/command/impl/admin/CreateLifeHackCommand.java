@@ -43,11 +43,11 @@ public class CreateLifeHackCommand implements Command {
         try {
             filePart = request.getPart(PARAM_IMAGE);
             List<String> errorMessages = new ArrayList<>();
-            if (LifeHackValidator.validate(category, name, content, excerpt, errorMessages)) {
+            if (LifeHackValidator.validate(category, name, content, excerpt, filePart, errorMessages)) {
                 LifeHack lifeHack = lifeHackService.buildLifeHack(user, category,
                         name, content, excerpt, filePart);
                 lifeHackService.addNewLifeHack(lifeHack);
-                router.setPagePath(PagePath.PATH_PAGE_MAIN);
+                router.setPagePath(PagePath.PATH_PAGE_ADD_LIFEHACK);
                 router.setRedirectRoute();
             } else {
                 request.getSession().setAttribute("errorMessages", errorMessages);

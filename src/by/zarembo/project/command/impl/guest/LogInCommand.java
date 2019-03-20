@@ -50,6 +50,8 @@ public class LogInCommand implements Command {
                 throw new CommandException("Log in error", e);
             }
         } else {
+            request.getSession().setAttribute(AttributeConstant.MESSAGE, "Correct data,please");
+            router.setRedirectRoute();
             router.setPagePath(PagePath.PATH_PAGE_LOGIN);
         }
         return router;

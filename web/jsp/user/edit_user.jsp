@@ -6,22 +6,31 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${sessionScope.language}" scope="session"/>
+<fmt:setBundle basename="i18n.message" var="locale"/>
+<fmt:message bundle="${locale}" key="edit_user.email" var="new_email"/>
+<fmt:message bundle="${locale}" key="edit_user.newpass" var="new_password"/>
+<fmt:message bundle="${locale}" key="edit_user.pagename" var="page_name"/>
+<fmt:message bundle="${locale}" key="edit_user.password" var="previous"/>
+<fmt:message bundle="${locale}" key="error" var="error"/>
+<fmt:message bundle="${locale}" key="sign_up.submit" var="submit"/>
 <html>
 <head>
-    <title>Change password</title>
+    <title>${page_name}</title>
 </head>
 <body>
 <div class="d-flex justify-content-center" id="login">
     <div class="card text-center">
         <div class="card-header p-3 mb-2 bg-info text-white">
-            <h3>Change</h3>
+            <h3>${page_name}</h3>
         </div>
-        <div class="card-body" id="login-body">
+        <div class="card-body" id="login-body" style="height: auto;">
             <c:if test="${not empty message}">
                 <div class="alert alert-danger alert-dismissible text-left" role="alert">
-                    <h4 class="alert-heading">Error!</h4>
+                    <h4 class="alert-heading">${error}!</h4>
                     <hr/>
                     <ul>
                             ${message}
@@ -38,7 +47,7 @@
                     <div class="form-group">
                         <label for="login-email">
                             <h6>
-                                <p class="text-secondary">Previous password</p>
+                                <p class="text-secondary">${previous}</p>
                             </h6>
                         </label>
                         <input type="password" name="previous_password" class="form-control"
@@ -50,13 +59,13 @@
                     <div class="form-group">
                         <label for="login-password">
                             <h6>
-                                <p class="text-secondary">New password</p>
+                                <p class="text-secondary">${new_password}</p>
                             </h6>
                         </label>
                         <input type="password" name="new_password" class="form-control" id="login-password"
                                placeholder="New">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">${submit}</button>
                 </form>
             </c:if>
             <c:if test="${param.edit eq 'email'}">
@@ -65,7 +74,7 @@
                     <div class="form-group">
                         <label for="login-email">
                             <h6>
-                                <p class="text-secondary">New email</p>
+                                <p class="text-secondary">${new_email}</p>
                             </h6>
                         </label>
                         <input type="email" name="new_email" class="form-control"
@@ -74,7 +83,7 @@
                                id="new-email" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">${submit}</button>
 
 
                 </form>

@@ -34,10 +34,10 @@ public class LeaveCommentCommand implements Command {
         }
         long lifeHackId = Long.parseLong(id);
         String path = String.valueOf(request.getSession().getAttribute(AttributeConstant.CURRENT_PAGE));
-        Comment comment = commentService.buildComment(commentContent, user, lifeHackId);
         List<String> errorMessages = new ArrayList<>();
-        if (CommentValidator.validate(comment, errorMessages)) {
+        if (CommentValidator.validate(commentContent, errorMessages)) {
             try {
+                Comment comment = commentService.buildComment(commentContent, user, lifeHackId);
                 commentService.addNewComment(comment);
                 router.setPagePath(path);
                 router.setRedirectRoute();
@@ -45,7 +45,8 @@ public class LeaveCommentCommand implements Command {
                 throw new CommandException(e);
             }
         } else {
-            request.setAttribute(ERROR_MESSAGES, errorMessages);
+            request.getSession().setAttribute(ERROR_MESSAGES, errorMessages);
+            router.setRedirectRoute();
             router.setPagePath(path);
         }
         return router;

@@ -42,6 +42,8 @@ public class UserDaoImpl implements Dao<User>, UserDao {
             "excerpt,lifehack_content,publication_date,category_id,lifehack_likes_amount,picture,u.user_id,role_id,firstname,lastname,nickname,email,password_hash FROM lifehacks " +
             " JOIN users u on lifehacks.author_user_id = u.user_id JOIN user_like_lifehacks ull on lifehacks.lifehack_id = ull.lifehack_id WHERE ull.user_id=? LIMIT ?,?; ";
 
+    private static final String SQL_SELECT_USER_LIFEHACK_LIKES_COUNT = "select count(*) as user_lifehack_count from user_like_lifehacks where user_id=?;";
+
     private static final String SQL_SELECT_USER_BY_EMAIL_AND_PASSWORD = "SELECT user_id,firstname,lastname," +
             "nickname,email,password_hash,role_id FROM users WHERE email=? AND password_hash=?;";
 
@@ -163,6 +165,23 @@ public class UserDaoImpl implements Dao<User>, UserDao {
             ConnectionPool.getInstance().releaseConnection(connection);
         }
         return lifeHacks;
+    }
+
+    public int findUserLikesLifeHacksCount(long userId) throws DaoException {
+        Connection connection = ConnectionPool.getInstance().takeConnection();
+        int count = 0;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_USER_LIFEHACK_LIKES_COUNT)) {
+            preparedStatement.setLong(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                count = resultSet.getInt("user_lifehack_count");
+            }
+        } catch (SQLException e) {
+            throw new DaoException("SQL exception, can't find lifehack", e);
+        } finally {
+            ConnectionPool.getInstance().releaseConnection(connection);
+        }
+        return count;
     }
 
     @Override

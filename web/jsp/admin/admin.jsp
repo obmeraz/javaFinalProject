@@ -8,9 +8,30 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${sessionScope.language}" scope="session"/>
+<fmt:setBundle basename="i18n.message" var="locale"/>
+<fmt:message bundle="${locale}" key="admin.pagename" var="page"/>
+<fmt:message bundle="${locale}" key="admin.lifehack.table.action" var="action"/>
+<fmt:message bundle="${locale}" key="admin.lifehack.table.author" var="author"/>
+<fmt:message bundle="${locale}" key="admin.lifehack.table.category" var="category"/>
+<fmt:message bundle="${locale}" key="admin.lifehack.table.likes_amount" var="likes"/>
+<fmt:message bundle="${locale}" key="admin.lifehack.table.name" var="lifehack_name"/>
+<fmt:message bundle="${locale}" key="admin.lifehack.table.publication_date" var="date"/>
+<fmt:message bundle="${locale}" key="admin.lifehacklist" var="lifehacks_list"/>
+<fmt:message bundle="${locale}" key="admin.userlist" var="users_list"/>
+<fmt:message bundle="${locale}" key="admin.users" var="usersName"/>
+<fmt:message bundle="${locale}" key="admin.lifehacks" var="lifehacksName"/>
+<fmt:message bundle="${locale}" key="admin.user.table.delete" var="delete"/>
+<fmt:message bundle="${locale}" key="admin.user.table.giverights" var="give"/>
+<fmt:message bundle="${locale}" key="admin.user.table.lastname" var="lastname"/>
+<fmt:message bundle="${locale}" key="admin.user.table.name" var="user_name"/>
+<fmt:message bundle="${locale}" key="admin.user.table.role" var="role"/>
+<fmt:message bundle="${locale}" key="admin.user.table.username" var="username"/>
+<fmt:message bundle="${locale}" key="admin.addButton" var="add"/>
 <html>
 <head>
-    <title>Admin page</title>
+    <title>${page}</title>
 </head>
 <body>
 <c:import url="../header.jsp"/>
@@ -19,31 +40,31 @@
         <div class="col-3">
             <div class="list-group">
                 <a href="${pageContext.request.contextPath}/controller?command=display_users_list"
-                   class="list-group-item">Users</a>
+                   class="list-group-item">${usersName}</a>
                 <a href="${pageContext.request.contextPath}/controller?command=display_lifehacks_list"
-                   class="list-group-item">Lifehacks</a>
+                   class="list-group-item">${lifehacksName}</a>
 
             </div>
         </div>
     </div>
     <div class="mr-3">
-        <a href="${pageContext.request.contextPath}/jsp/admin/create_lifehack.jsp" class="btn btn-success mt-3">Add
-            lifehack</a>
+        <a href="${pageContext.request.contextPath}/jsp/admin/create_lifehack.jsp"
+           class="btn btn-success mt-3">${add}</a>
     </div>
     <c:if test="${users ne null}">
         <div class="col-lg-9">
             <div class="table-responsive" id="adminTable">
                 <table class="table">
-                    <caption>Список пользователей</caption>
+                    <caption>${users_list}</caption>
                     <thead>
                     <tr>
                         <th scope="col">id</th>
-                        <th scope="col">Имя</th>
-                        <th scope="col">Фамилия</th>
-                        <th scope="col">Nickname</th>
-                        <th scope="col">Роль</th>
-                        <th scope="col">Delete</th>
-                        <th scope="col">Give right</th>
+                        <th scope="col">${user_name}</th>
+                        <th scope="col">${lastname}</th>
+                        <th scope="col">${username}</th>
+                        <th scope="col">${role}</th>
+                        <th scope="col">${delete}</th>
+                        <th scope="col">${give}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -81,16 +102,16 @@
             <div class="col-lg-9">
                 <div class="table-responsive" id="adminTable2">
                     <table class="table">
-                        <caption>Список лайхаков</caption>
+                        <caption>${lifehacks_list}</caption>
                         <thead>
                         <tr>
                             <th scope="col">id</th>
-                            <th scope="col">Название</th>
-                            <th scope="col">Категория</th>
-                            <th scope="col">Дата публикации</th>
-                            <th scope="col">Автор</th>
-                            <th scope="col">Количество лайков</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">${lifehack_name}</th>
+                            <th scope="col">${category}</th>
+                            <th scope="col">${date}</th>
+                            <th scope="col">${author}</th>
+                            <th scope="col">${likes}</th>
+                            <th scope="col">${action}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -119,6 +140,7 @@
         </c:when>
         <c:otherwise>
             ${message}
+            <c:set var="message" value="" scope="session"/>
         </c:otherwise>
 
     </c:choose>

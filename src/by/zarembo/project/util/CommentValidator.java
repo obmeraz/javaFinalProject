@@ -1,15 +1,12 @@
 package by.zarembo.project.util;
 
-import by.zarembo.project.entity.Comment;
-
 import java.util.List;
 
 public class CommentValidator {
     private static final String REGEX_COMMENT_CONTENT = "^[а-яА-ЯёЁa-zA-Z\\d\\W]{1,255}$";
 
-    public static boolean validate(Comment comment, List<String> errorMessages) {
+    public static boolean validate(String content, List<String> errorMessages) {
         boolean isCorrect = true;
-        String content = comment.getContent();
         if (content == null || content.isEmpty()) {
             errorMessages.add("Fill the empty element");
             return false;

@@ -32,11 +32,11 @@ public class UserValidator {
             isValid = false;
         }
 
-        if (!(firstName.matches(REGEX_NAME))) {
+        if (!validateName(firstName)) {
             messages.add("Invalid First Name");
             isValid = false;
         }
-        if (!(lastName.matches(REGEX_NAME))) {
+        if (!lastName.matches(REGEX_NAME)) {
             messages.add("Invalid Last Name");
             isValid = false;
         }
@@ -44,7 +44,7 @@ public class UserValidator {
             messages.add("Invalid Email");
             isValid = false;
         }
-        if (!(nickname.matches(REGEX_NICKNAME))) {
+        if (!nickname.matches(REGEX_NICKNAME)) {
             messages.add("Invalid Nickname");
             isValid = false;
         }
@@ -71,6 +71,13 @@ public class UserValidator {
             return false;
         }
         return email.matches(REGEX_EMAIL);
+    }
+
+    public static boolean validateName(String firstName) {
+        if (firstName == null || firstName.isEmpty()) {
+            return false;
+        }
+        return firstName.matches(REGEX_NAME);
     }
 
     public static boolean validatePassword(String password) {

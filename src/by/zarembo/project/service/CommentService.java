@@ -1,6 +1,5 @@
 package by.zarembo.project.service;
 
-import by.zarembo.project.command.CommandType;
 import by.zarembo.project.command.SortType;
 import by.zarembo.project.dao.impl.CommentDaoImpl;
 import by.zarembo.project.entity.Comment;

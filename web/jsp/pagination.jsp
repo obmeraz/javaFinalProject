@@ -14,8 +14,7 @@
     <ul class="pagination pagination-md justify-content-center" style="margin: 0px; padding-bottom: 23px;">
         <c:if test="${currentPage != 1}">
             <li class="page-item"><a class="page-link text-dark"
-                                     href="${pageContext.request.contextPath}/controller?
-                                     recordsPerPage=${recordsPerPage}&current_page=${currentPage-1}&command=display_lifehacks_by_type&type=${type}&category=${category}">Previous</a>
+                                     href="${pageContext.request.contextPath}/controller?recordsPerPage=${recordsPerPage}&current_page=${currentPage-1}&command=display_lifehacks_by_type&type=${type}&category=${category}">Previous</a>
             </li>
         </c:if>
 
@@ -28,8 +27,7 @@
                 </c:when>
                 <c:otherwise>
                     <li class="page-item"><a class="page-link text-dark"
-                                             href="${pageContext.request.contextPath}/controller?
-                                             recordsPerPage=${recordsPerPage}&current_page=${i}&command=display_lifehacks_by_type&type=${type}&category=${category}">${i}</a>
+                                             href="${pageContext.request.contextPath}/controller?recordsPerPage=${recordsPerPage}&current_page=${i}&command=display_lifehacks_by_type&type=${type}&category=${category}">${i}</a>
                     </li>
                 </c:otherwise>
             </c:choose>
@@ -37,8 +35,7 @@
 
         <c:if test="${currentPage lt numberOfPages}">
             <li class="page-item"><a class="page-link text-dark"
-                                     href="${pageContext.request.contextPath}/controller?
-                                     recordsPerPage=${recordsPerPage}&current_page=${currentPage+1}&command=display_lifehacks_by_type&type=${type}&category=${category}">Next</a>
+                                     href="${pageContext.request.contextPath}/controller?recordsPerPage=${recordsPerPage}&current_page=${currentPage+1}&command=display_lifehacks_by_type&type=${type}&category=${category}">Next</a>
             </li>
         </c:if>
     </ul>

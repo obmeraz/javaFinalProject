@@ -24,9 +24,7 @@ import java.util.Optional;
         maxRequestSize = 1024 * 1024 * 5 * 5)
 public class Controller extends HttpServlet {
     //todo don't forget uncomment pattern in html
-    //todo how test service if there are almost all methods with DB?only util
     //todo what jautodoc plugin for eclipse or maybe idea
-    //todo need we text document on interview?need,only description and use cases
     private static final String COMMAND_PARAMETER = "command";
     private static final String EXCEPTION_PARAMETER = "exception";
 

@@ -9,6 +9,20 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<fmt:setLocale value="${sessionScope.language}" scope="session"/>
+<fmt:setBundle basename="i18n.message" var="locale"/>
+<fmt:message bundle="${locale}" key="lifehacks.fresh" var="fresh"/>
+<fmt:message bundle="${locale}" key="lifehacks.popular" var="popular"/>
+<fmt:message bundle="${locale}" key="lifehacks.likelifehacks" var="liked"/>
+<fmt:message bundle="${locale}" key="category.cinema" var="cinema"/>
+<fmt:message bundle="${locale}" key="category.education" var="education"/>
+<fmt:message bundle="${locale}" key="category.food" var="food"/>
+<fmt:message bundle="${locale}" key="category.life" var="life"/>
+<fmt:message bundle="${locale}" key="category.motivation" var="motivation"/>
+<fmt:message bundle="${locale}" key="category.news" var="news"/>
+<fmt:message bundle="${locale}" key="category.sport" var="sport"/>
+<fmt:message bundle="${locale}" key="category.technologies" var="technologies"/>
+
 <html>
 <head>
     <title>Лайфхакер</title>
@@ -20,19 +34,45 @@
     <h1 align="center" class="text-white" style="padding-top: 150px; padding-bottom: 80px;">
         <c:choose>
             <c:when test="${requestScope.type eq 'recent'}">
-                Свежие
+                ${fresh}
             </c:when>
 
             <c:when test="${requestScope.type eq 'popular'}">
-                Популярные
+                ${popular}
             </c:when>
 
             <c:when test="${not empty category}">
-                ${category}
+                <%--${category}--%>
+                <c:choose>
+                    <c:when test="${category eq 'SPORT'}">
+                        ${sport}
+                    </c:when>
+                    <c:when test="${category eq 'LIFE'}">
+                        ${life}
+                    </c:when>
+                    <c:when test="${category eq 'MOTIVATION'}">
+                        ${motivation}
+                    </c:when>
+                    <c:when test="${category eq 'TECHNOLOGIES'}">
+                        ${technologies}
+                    </c:when>
+                    <c:when test="${category eq 'CINEMA'}">
+                        ${cinema}
+                    </c:when>
+                    <c:when test="${category eq 'NEWS'}">
+                        ${news}
+                    </c:when>
+                    <c:when test="${category eq 'EDUCATION'}">
+                        ${education}
+                    </c:when>
+                    <c:otherwise>
+                        ${food}
+                    </c:otherwise>
+                </c:choose>
             </c:when>
 
             <c:otherwise>
-                ${sessionScope.user.firstName} любимые лайфхаки
+                ${sessionScope.user.firstName} ${liked}
             </c:otherwise>
         </c:choose>
     </h1>
@@ -62,16 +102,41 @@
                                             <img src="${pageContext.request.contextPath}/img/heart.png"
                                                  class="ml-5" alt="..."
                                                  style="width: 15px; height: 15px">
-                                            ${lifehack.likesAmount}
+                                                ${lifehack.likesAmount}
                                             <img src="${pageContext.request.contextPath}/img/comment-icon.svg"
                                                  class="ml-5" alt="..."
                                                  style="width: 15px; height: 15px">
-                                            ${commentMap.get(lifehack)}
+                                                ${commentMap.get(lifehack)}
                                             <span class="badge badge-success ml-5">
                                                     <a class="text-light"
                                                        href="${pageContext.request.contextPath}/controller?command=display_lifehacks_by_type&type=category&category=${lifehack.category}&current_page=${1}"
                                                        style="text-decoration:none">
-                                                            ${lifehack.category}</a></span>
+                                                            <c:choose>
+                                                                <c:when test="${lifehack.category eq 'SPORT'}">
+                                                                    ${sport}
+                                                                </c:when>
+                                                                <c:when test="${lifehack.category eq 'LIFE'}">
+                                                                    ${life}
+                                                                </c:when>
+                                                                <c:when test="${lifehack.category eq 'MOTIVATION'}">
+                                                                    ${motivation}
+                                                                </c:when>
+                                                                <c:when test="${lifehack.category eq 'TECHNOLOGIES'}">
+                                                                    ${technologies}
+                                                                </c:when>
+                                                                <c:when test="${lifehack.category eq 'CINEMA'}">
+                                                                    ${cinema}
+                                                                </c:when>
+                                                                <c:when test="${lifehack.category eq 'NEWS'}">
+                                                                    ${news}
+                                                                </c:when>
+                                                                <c:when test="${lifehack.category eq 'EDUCATION'}">
+                                                                    ${education}
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    ${food}
+                                                                </c:otherwise>
+                                                            </c:choose></a></span>
                                         </small>
                                     </p>
                                 </div>
