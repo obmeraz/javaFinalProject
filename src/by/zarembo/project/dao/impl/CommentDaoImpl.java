@@ -9,9 +9,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * The type Comment dao.
+ */
 public class CommentDaoImpl implements CommentDao {
     private final static CommentDaoImpl instance = new CommentDaoImpl();
 
@@ -56,6 +57,11 @@ public class CommentDaoImpl implements CommentDao {
     private CommentDaoImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static CommentDaoImpl getInstance() {
 
         return instance;
@@ -112,7 +118,7 @@ public class CommentDaoImpl implements CommentDao {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DaoException("SQL exception, can't create comment", e);
+            throw new DaoException("SQL exception, can't delete comment", e);
         } finally {
             ConnectionPool.getInstance().releaseConnection(connection);
         }
@@ -129,7 +135,7 @@ public class CommentDaoImpl implements CommentDao {
                 comment = buildEntity(resultSet);
             }
         } catch (SQLException e) {
-            throw new DaoException("Can't select all comments", e);
+            throw new DaoException("Can't find comment by id", e);
         } finally {
             ConnectionPool.getInstance().releaseConnection(connection);
         }
@@ -147,24 +153,26 @@ public class CommentDaoImpl implements CommentDao {
                 comments.add(buildEntity(resultSet));
             }
         } catch (SQLException e) {
-            throw new DaoException("Can't select all comments", e);
+            throw new DaoException("Can't find comments to lifehack", e);
         } finally {
             ConnectionPool.getInstance().releaseConnection(connection);
         }
         return comments;
     }
 
-    public List<Comment> findCommentsToLifeHackByLikesAmount(long id) throws DaoException {
+    @Override
+    public List<Comment> findCommentsToLifeHackSortByLikesAmount(long id) throws DaoException {
         Connection connection = ConnectionPool.getInstance().takeConnection();
         List<Comment> comments = new ArrayList<>();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_COMMENTS_TO_LIFEHACK_BY_LIKES_AMOUNT)) {
+        try (PreparedStatement preparedStatement =
+                     connection.prepareStatement(SQL_SELECT_ALL_COMMENTS_TO_LIFEHACK_BY_LIKES_AMOUNT)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 comments.add(buildEntity(resultSet));
             }
         } catch (SQLException e) {
-            throw new DaoException("Can't select comments", e);
+            throw new DaoException("Can't select comments to lifehack sort by likes", e);
         } finally {
             ConnectionPool.getInstance().releaseConnection(connection);
         }
@@ -178,12 +186,13 @@ public class CommentDaoImpl implements CommentDao {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DaoException("SQL exception, can't like comment", e);
+            throw new DaoException("SQL exception, can't increment comments likes", e);
         } finally {
             ConnectionPool.getInstance().releaseConnection(connection);
         }
     }
 
+    @Override
     public void insertUserLikeComment(long commentId, long userId) throws DaoException {
         Connection connection = ConnectionPool.getInstance().takeConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_USER_LIKE_COMMENT)) {
@@ -197,6 +206,7 @@ public class CommentDaoImpl implements CommentDao {
         }
     }
 
+    @Override
     public void deleteUserLikeComment(long lifeHackId, long userId) throws DaoException {
         Connection connection = ConnectionPool.getInstance().takeConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_USER_LIKE_COMMENT)) {
@@ -204,12 +214,13 @@ public class CommentDaoImpl implements CommentDao {
             preparedStatement.setLong(2, lifeHackId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DaoException("SQL exception, delete users like comment", e);
+            throw new DaoException("SQL exception, delete user like comment", e);
         } finally {
             ConnectionPool.getInstance().releaseConnection(connection);
         }
     }
 
+    @Override
     public int isUserLikedCommentAlready(long lifeHackId, long userId) throws DaoException {
         Connection connection = ConnectionPool.getInstance().takeConnection();
         int count;
@@ -220,20 +231,21 @@ public class CommentDaoImpl implements CommentDao {
             resultSet.next();
             count = resultSet.getInt(USER_LIKE_COMMENTS_COUNT);
         } catch (SQLException e) {
-            throw new DaoException("can't check user like comments", e);
+            throw new DaoException("Can't check is user liked comment already", e);
         } finally {
             ConnectionPool.getInstance().releaseConnection(connection);
         }
         return count;
     }
 
+    @Override
     public void decrementCommentLikes(long lifeHackId) throws DaoException {
         Connection connection = ConnectionPool.getInstance().takeConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_REMOVE_LIKE_COMMENT_BY_ID)) {
             preparedStatement.setLong(1, lifeHackId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DaoException("SQL exception, can't remove like comment", e);
+            throw new DaoException("SQL exception, decrement comments likes", e);
         } finally {
             ConnectionPool.getInstance().releaseConnection(connection);
         }

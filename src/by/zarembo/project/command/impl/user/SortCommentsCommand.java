@@ -1,7 +1,7 @@
 package by.zarembo.project.command.impl.user;
 
-import by.zarembo.project.command.AttributeConstant;
 import by.zarembo.project.command.Command;
+import by.zarembo.project.command.CommandConstant;
 import by.zarembo.project.command.PagePath;
 import by.zarembo.project.command.SortType;
 import by.zarembo.project.controller.Router;
@@ -19,6 +19,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * The type Sort comments command.
+ */
 public class SortCommentsCommand implements Command {
     private static final String ATTRIBUTE_COMMENTS = "comments";
     private static final String SORT_TYPE = "sort_type";
@@ -30,11 +33,11 @@ public class SortCommentsCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         Router router = new Router();
-        User user = (User) request.getSession().getAttribute(AttributeConstant.USER);
-        String id = request.getParameter(AttributeConstant.LIFEHACK_ID);
+        User user = (User) request.getSession().getAttribute(CommandConstant.USER);
+        String id = request.getParameter(CommandConstant.LIFEHACK_ID);
         String type = request.getParameter(SORT_TYPE);
         if (!LifeHackValidator.validateId(id) || !commentService.checkSortTypeEnum(type)) {
-            request.getSession().setAttribute(AttributeConstant.MESSAGE, "Invalid data");
+            request.getSession().setAttribute(CommandConstant.MESSAGE, "Invalid data");
             router.setPagePath(PagePath.PATH_PAGE_ERROR);
             router.setRedirectRoute();
             return router;

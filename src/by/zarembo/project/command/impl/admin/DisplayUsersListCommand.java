@@ -1,7 +1,7 @@
 package by.zarembo.project.command.impl.admin;
 
-import by.zarembo.project.command.AttributeConstant;
 import by.zarembo.project.command.Command;
+import by.zarembo.project.command.CommandConstant;
 import by.zarembo.project.command.PagePath;
 import by.zarembo.project.controller.Router;
 import by.zarembo.project.entity.User;
@@ -12,6 +12,9 @@ import by.zarembo.project.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * The type Display users list command.
+ */
 public class DisplayUsersListCommand implements Command {
     private UserService userService = new UserService();
 
@@ -22,7 +25,7 @@ public class DisplayUsersListCommand implements Command {
         try {
             users = userService.takeAllUsers();
             router.setPagePath(PagePath.PATH_PAGE_ADMIN);
-            request.setAttribute(AttributeConstant.USERS, users);
+            request.setAttribute(CommandConstant.USERS, users);
         } catch (ServiceException e) {
             throw new CommandException(e);
         }

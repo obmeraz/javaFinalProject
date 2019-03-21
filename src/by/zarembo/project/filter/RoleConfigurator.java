@@ -3,11 +3,20 @@ package by.zarembo.project.filter;
 import by.zarembo.project.command.CommandType;
 import by.zarembo.project.entity.RoleType;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.HashSet;
+import java.util.Set;
 
+/**
+ * The type Role configurator.
+ */
 class RoleConfigurator {
     private EnumMap<RoleType, Set<CommandType>> rolePrivilegeMap = new EnumMap<>(RoleType.class);
 
+    /**
+     * Instantiates a new Role configurator.
+     */
     RoleConfigurator() {
         initGuestPrivileges();
         initUserPrivileges();
@@ -75,11 +84,24 @@ class RoleConfigurator {
         rolePrivilegeMap.put(RoleType.ADMIN, adminCommands);
     }
 
+    /**
+     * Check role privileges boolean.
+     *
+     * @param userRole    the user role
+     * @param commandType the command type
+     * @return the boolean
+     */
     boolean checkRolePrivileges(RoleType userRole, CommandType commandType) {
         Set<CommandType> commandTypeList = rolePrivilegeMap.get(userRole);
         return commandTypeList.stream().anyMatch(commandType::equals);
     }
 
+    /**
+     * Check command name boolean.
+     *
+     * @param commandName the command name
+     * @return the boolean
+     */
     boolean checkCommandName(String commandName) {
         return Arrays.stream(CommandType.values())
                 .anyMatch(commandType -> commandType.toString().equals(commandName.toUpperCase()));

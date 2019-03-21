@@ -10,9 +10,13 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * The type Email sender.
+ */
 public class EmailSender {
     private static final String PROPERTIES_FILENAME = "mail.properties";
     private static final String EMAIL_ADDRESS = "ml.address";
@@ -21,6 +25,12 @@ public class EmailSender {
     private static final String EMAIL_SUBJECT = "LifeHacker";
     private static Logger logger = LogManager.getLogger();
 
+    /**
+     * Send email.
+     *
+     * @param user      the user
+     * @param emailType the email type
+     */
     public void sendEmail(User user, EmailType emailType) {
         Properties properties = new Properties();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();

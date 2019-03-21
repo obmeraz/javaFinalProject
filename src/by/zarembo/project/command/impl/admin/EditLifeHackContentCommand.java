@@ -1,7 +1,7 @@
 package by.zarembo.project.command.impl.admin;
 
-import by.zarembo.project.command.AttributeConstant;
 import by.zarembo.project.command.Command;
+import by.zarembo.project.command.CommandConstant;
 import by.zarembo.project.command.PagePath;
 import by.zarembo.project.controller.Router;
 import by.zarembo.project.entity.LifeHack;
@@ -13,6 +13,9 @@ import by.zarembo.project.util.LifeHackValidator;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * The type Edit lifehack content command.
+ */
 public class EditLifeHackContentCommand implements Command {
     private static final String NEW_LIFEHACK_CONTENT = "new_content";
     private LifeHackService lifeHackService = new LifeHackService();
@@ -22,8 +25,8 @@ public class EditLifeHackContentCommand implements Command {
         Router router = new Router();
         LifeHack lifeHack;
         String newContent = request.getParameter(NEW_LIFEHACK_CONTENT);
-        String path = String.valueOf(request.getSession().getAttribute(AttributeConstant.CURRENT_PAGE));
-        String id = request.getParameter(AttributeConstant.LIFEHACK_ID);
+        String path = String.valueOf(request.getSession().getAttribute(CommandConstant.CURRENT_PAGE));
+        String id = request.getParameter(CommandConstant.LIFEHACK_ID);
         if (!LifeHackValidator.validateId(id)) {
             setRouterConfiguration(PagePath.PATH_PAGE_ERROR, "Invalid lifehackId", request, router);
             return router;
@@ -50,7 +53,7 @@ public class EditLifeHackContentCommand implements Command {
     }
 
     private void setRouterConfiguration(String path, String message, HttpServletRequest request, Router router) {
-        request.getSession().setAttribute(AttributeConstant.MESSAGE, message);
+        request.getSession().setAttribute(CommandConstant.MESSAGE, message);
         router.setPagePath(path);
         router.setRedirectRoute();
     }

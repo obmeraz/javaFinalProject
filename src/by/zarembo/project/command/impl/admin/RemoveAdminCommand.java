@@ -1,7 +1,7 @@
 package by.zarembo.project.command.impl.admin;
 
-import by.zarembo.project.command.AttributeConstant;
 import by.zarembo.project.command.Command;
+import by.zarembo.project.command.CommandConstant;
 import by.zarembo.project.command.PagePath;
 import by.zarembo.project.controller.Router;
 import by.zarembo.project.entity.User;
@@ -12,16 +12,19 @@ import by.zarembo.project.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * The type Remove admin command.
+ */
 public class RemoveAdminCommand implements Command {
     private UserService userService = new UserService();
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         Router router = new Router();
-        String path = String.valueOf(request.getSession().getAttribute(AttributeConstant.CURRENT_PAGE));
-        String id = request.getParameter(AttributeConstant.USER_ID);
+        String path = String.valueOf(request.getSession().getAttribute(CommandConstant.CURRENT_PAGE));
+        String id = request.getParameter(CommandConstant.USER_ID);
         if (id == null || id.isEmpty()) {
-            request.getSession().setAttribute(AttributeConstant.MESSAGE, "Invalid data");
+            request.getSession().setAttribute(CommandConstant.MESSAGE, "Invalid data");
             router.setPagePath(PagePath.PATH_PAGE_ERROR);
             router.setRedirectRoute();
             return router;
@@ -35,7 +38,7 @@ public class RemoveAdminCommand implements Command {
                 router.setPagePath(path);
                 router.setRedirectRoute();
             } else {
-                request.getSession().setAttribute(AttributeConstant.MESSAGE, "Can't found user");
+                request.getSession().setAttribute(CommandConstant.MESSAGE, "Can't found user");
                 router.setPagePath(PagePath.PATH_PAGE_ERROR);
                 router.setRedirectRoute();
             }

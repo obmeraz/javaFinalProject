@@ -1,7 +1,7 @@
 package by.zarembo.project.command.impl.user;
 
-import by.zarembo.project.command.AttributeConstant;
 import by.zarembo.project.command.Command;
+import by.zarembo.project.command.CommandConstant;
 import by.zarembo.project.command.PagePath;
 import by.zarembo.project.controller.Router;
 import by.zarembo.project.entity.User;
@@ -12,6 +12,9 @@ import by.zarembo.project.util.UserValidator;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type Change password command.
+ */
 public class ChangePasswordCommand implements Command {
     private static final String USER_PREVIOUS_PASSWORD = "previous_password";
     private static final String USER_NEW_PASSWORD = "new_password";
@@ -22,20 +25,20 @@ public class ChangePasswordCommand implements Command {
         Router router = new Router();
         String oldPassword = request.getParameter(USER_PREVIOUS_PASSWORD);
         String newPassword = request.getParameter(USER_NEW_PASSWORD);
-        String path = String.valueOf(request.getSession().getAttribute(AttributeConstant.CURRENT_PAGE));
-        User user = (User) request.getSession().getAttribute(AttributeConstant.USER);
+        String path = String.valueOf(request.getSession().getAttribute(CommandConstant.CURRENT_PAGE));
+        User user = (User) request.getSession().getAttribute(CommandConstant.USER);
         try {
             if (UserValidator.validatePassword(oldPassword) && UserValidator.validatePassword(newPassword)) {
                 if (userService.changePassword(oldPassword, newPassword, user)) {
                     router.setPagePath(PagePath.PATH_PAGE_USER);
                     router.setRedirectRoute();
                 } else {
-                    request.getSession().setAttribute(AttributeConstant.MESSAGE, "Wrong previous password");
+                    request.getSession().setAttribute(CommandConstant.MESSAGE, "Wrong previous password");
                     router.setPagePath(path);
                     router.setRedirectRoute();
                 }
             } else {
-                request.getSession().setAttribute(AttributeConstant.MESSAGE, "Invalid password");
+                request.getSession().setAttribute(CommandConstant.MESSAGE, "Invalid password");
                 router.setPagePath(path);
                 router.setRedirectRoute();
             }

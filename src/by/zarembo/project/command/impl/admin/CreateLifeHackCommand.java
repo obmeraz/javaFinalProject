@@ -1,7 +1,7 @@
 package by.zarembo.project.command.impl.admin;
 
-import by.zarembo.project.command.AttributeConstant;
 import by.zarembo.project.command.Command;
+import by.zarembo.project.command.CommandConstant;
 import by.zarembo.project.command.PagePath;
 import by.zarembo.project.controller.Router;
 import by.zarembo.project.entity.LifeHack;
@@ -20,6 +20,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Create lifehack command.
+ */
 public class CreateLifeHackCommand implements Command {
     private static Logger logger = LogManager.getLogger();
     private static final String PARAM_LIFEHACK_NAME = "lifehack_name";
@@ -27,7 +30,6 @@ public class CreateLifeHackCommand implements Command {
     private static final String PARAM_EXCERPT = "excerpt";
     private static final String PARAM_CATEGORY = "category";
     private static final String PARAM_IMAGE = "image";
-    private static final String PARAM_USER = "user";
     private LifeHackService lifeHackService = new LifeHackService();
 
     @Override
@@ -35,10 +37,10 @@ public class CreateLifeHackCommand implements Command {
         Router router = new Router();
         String category = request.getParameter(PARAM_CATEGORY);
         String name = request.getParameter(PARAM_LIFEHACK_NAME);
-        User user = (User) request.getSession().getAttribute(PARAM_USER);
+        User user = (User) request.getSession().getAttribute(CommandConstant.USER);
         String content = request.getParameter(PARAM_LIFEHACK_CONTENT);
         String excerpt = request.getParameter(PARAM_EXCERPT);
-        String path = String.valueOf(request.getSession().getAttribute(AttributeConstant.CURRENT_PAGE));
+        String path = String.valueOf(request.getSession().getAttribute(CommandConstant.CURRENT_PAGE));
         Part filePart;
         try {
             filePart = request.getPart(PARAM_IMAGE);
@@ -55,7 +57,7 @@ public class CreateLifeHackCommand implements Command {
                 router.setRedirectRoute();
             }
         } catch (IOException | ServletException e) {
-            request.getSession().setAttribute(AttributeConstant.MESSAGE, "Getting part from request error");
+            request.getSession().setAttribute(CommandConstant.MESSAGE, "Getting part from request error");
             logger.error("Getting part from request error", e);
             router.setPagePath(PagePath.PATH_PAGE_ERROR);
             router.setRedirectRoute();

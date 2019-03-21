@@ -1,7 +1,7 @@
 package by.zarembo.project.command.impl.guest;
 
-import by.zarembo.project.command.AttributeConstant;
 import by.zarembo.project.command.Command;
+import by.zarembo.project.command.CommandConstant;
 import by.zarembo.project.command.PagePath;
 import by.zarembo.project.controller.Router;
 import by.zarembo.project.entity.User;
@@ -12,6 +12,9 @@ import by.zarembo.project.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * The type Activate account command.
+ */
 public class ActivateAccountCommand implements Command {
     private static final String USER_HASH_DATA = "hash";
     private UserService userService = new UserService();
@@ -29,12 +32,12 @@ public class ActivateAccountCommand implements Command {
                     router.setPagePath(PagePath.PATH_PAGE_ACTIVATION);
                     router.setRedirectRoute();
                 } else {
-                    request.getSession().setAttribute(AttributeConstant.MESSAGE, "Not found information");
+                    request.getSession().setAttribute(CommandConstant.MESSAGE, "Not found information");
                     router.setPagePath(PagePath.PATH_PAGE_ERROR);
                     router.setRedirectRoute();
                 }
             }else{
-                request.getSession().setAttribute(AttributeConstant.MESSAGE, "Error");
+                request.getSession().setAttribute(CommandConstant.MESSAGE, "Error");
                 router.setPagePath(PagePath.PATH_PAGE_ERROR);
                 router.setRedirectRoute();
             }

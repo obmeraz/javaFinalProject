@@ -11,11 +11,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * The type User dao.
+ */
 public class UserDaoImpl implements Dao<User>, UserDao {
     private static UserDaoImpl instance = new UserDaoImpl();
+
+    private static final String COLUMN_USER_LIFEHACK_COUNT = "user_lifehack_count";
+    private static final String COLUMN_ACTIVATED = "activated";
 
     private static final String SQL_SELECT_ALL_USERS = "SELECT user_id,firstname,lastname," +
             "nickname,email,password_hash,role_id FROM users;";
@@ -58,6 +62,11 @@ public class UserDaoImpl implements Dao<User>, UserDao {
 
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static UserDaoImpl getInstance() {
         return instance;
     }
@@ -139,7 +148,7 @@ public class UserDaoImpl implements Dao<User>, UserDao {
                 user = buildEntity(resultSet);
             }
         } catch (SQLException e) {
-            throw new DaoException("SQL exception, can't find all users", e);
+            throw new DaoException("SQL exception, can't find user by id", e);
         } finally {
             ConnectionPool.getInstance().releaseConnection(connection);
         }
@@ -160,13 +169,14 @@ public class UserDaoImpl implements Dao<User>, UserDao {
                 lifeHacks.add(lifeHackDao.buildEntity(resultSet));
             }
         } catch (SQLException e) {
-            throw new DaoException("SQL exception, can't find lifehack", e);
+            throw new DaoException("SQL exception, can't find user likes lifehacks", e);
         } finally {
             ConnectionPool.getInstance().releaseConnection(connection);
         }
         return lifeHacks;
     }
 
+    @Override
     public int findUserLikesLifeHacksCount(long userId) throws DaoException {
         Connection connection = ConnectionPool.getInstance().takeConnection();
         int count = 0;
@@ -174,10 +184,10 @@ public class UserDaoImpl implements Dao<User>, UserDao {
             preparedStatement.setLong(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                count = resultSet.getInt("user_lifehack_count");
+                count = resultSet.getInt(COLUMN_USER_LIFEHACK_COUNT);
             }
         } catch (SQLException e) {
-            throw new DaoException("SQL exception, can't find lifehack", e);
+            throw new DaoException("SQL exception, can't find user likes lifehacks count", e);
         } finally {
             ConnectionPool.getInstance().releaseConnection(connection);
         }
@@ -232,7 +242,7 @@ public class UserDaoImpl implements Dao<User>, UserDao {
                 user = buildEntity(resultSet);
             }
         } catch (SQLException e) {
-            throw new DaoException("SQL exception, can't find all users", e);
+            throw new DaoException("SQL exception, can't user by email and password", e);
         } finally {
             ConnectionPool.getInstance().releaseConnection(connection);
         }
@@ -250,7 +260,7 @@ public class UserDaoImpl implements Dao<User>, UserDao {
                 user = buildEntity(resultSet);
             }
         } catch (SQLException e) {
-            throw new DaoException("SQL exception, can't find all users", e);
+            throw new DaoException("SQL exception, can't find user by password", e);
         } finally {
             ConnectionPool.getInstance().releaseConnection(connection);
         }
@@ -267,7 +277,7 @@ public class UserDaoImpl implements Dao<User>, UserDao {
                 throw new DaoException("SQL exception, affected rows 0");
             }
         } catch (SQLException e) {
-            throw new DaoException("SQL exception, can't update user", e);
+            throw new DaoException("SQL exception, can't activate user account", e);
         } finally {
             ConnectionPool.getInstance().releaseConnection(connection);
         }
@@ -281,9 +291,9 @@ public class UserDaoImpl implements Dao<User>, UserDao {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
-            result = resultSet.getString("activated");
+            result = resultSet.getString(COLUMN_ACTIVATED);
         } catch (SQLException e) {
-            throw new DaoException("SQL exception, can't update user", e);
+            throw new DaoException("SQL exception, can't take activate information", e);
         } finally {
             ConnectionPool.getInstance().releaseConnection(connection);
         }

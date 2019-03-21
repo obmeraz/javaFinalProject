@@ -8,10 +8,22 @@ import by.zarembo.project.entity.User;
 import by.zarembo.project.exception.DaoException;
 import by.zarembo.project.exception.ServiceException;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
+/**
+ * The type Comment service.
+ */
 public class CommentService {
 
+    /**
+     * Add new comment.
+     *
+     * @param comment the comment
+     * @throws ServiceException the service exception
+     */
     public void addNewComment(Comment comment) throws ServiceException {
         CommentDaoImpl commentDao = CommentDaoImpl.getInstance();
         try {
@@ -21,6 +33,14 @@ public class CommentService {
         }
     }
 
+    /**
+     * Build comment comment.
+     *
+     * @param commentContent the comment content
+     * @param user           the user
+     * @param lifeHackId     the life hack id
+     * @return the comment
+     */
     public Comment buildComment(String commentContent, User user, long lifeHackId) {
         Comment comment = new Comment();
         comment.setLifeHackId(lifeHackId);
@@ -31,6 +51,13 @@ public class CommentService {
         return comment;
     }
 
+    /**
+     * Take comments to lifehack list.
+     *
+     * @param id the id
+     * @return the list
+     * @throws ServiceException the service exception
+     */
     public List<Comment> takeCommentsToLifeHack(long id) throws ServiceException {
         CommentDaoImpl commentDao = CommentDaoImpl.getInstance();
         List<Comment> comments;
@@ -42,17 +69,23 @@ public class CommentService {
         return comments;
     }
 
-    public List<Comment> takeCommentsToLifeHackByLikesAmount(long id) throws ServiceException {
+    private List<Comment> takeCommentsToLifeHackSortByLikesAmount(long id) throws ServiceException {
         CommentDaoImpl commentDao = CommentDaoImpl.getInstance();
         List<Comment> comments;
         try {
-            comments = commentDao.findCommentsToLifeHackByLikesAmount(id);
+            comments = commentDao.findCommentsToLifeHackSortByLikesAmount(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
         return comments;
     }
 
+    /**
+     * Like comment.
+     *
+     * @param id the id
+     * @throws ServiceException the service exception
+     */
     public void likeComment(long id) throws ServiceException {
         CommentDaoImpl commentDao = CommentDaoImpl.getInstance();
         try {
@@ -62,6 +95,12 @@ public class CommentService {
         }
     }
 
+    /**
+     * Delete comment.
+     *
+     * @param id the id
+     * @throws ServiceException the service exception
+     */
     public void deleteComment(long id) throws ServiceException {
         CommentDaoImpl commentDao = CommentDaoImpl.getInstance();
         try {
@@ -71,11 +110,24 @@ public class CommentService {
         }
     }
 
+    /**
+     * Check sort type enum boolean.
+     *
+     * @param sortType the sort type
+     * @return the boolean
+     */
     public boolean checkSortTypeEnum(String sortType) {
         return Arrays.stream(SortType.values())
                 .anyMatch(type -> type.toString().equals(sortType.toUpperCase()));
     }
 
+    /**
+     * Insert user like comment.
+     *
+     * @param commentId the comment id
+     * @param userId    the user id
+     * @throws ServiceException the service exception
+     */
     public void insertUserLikeComment(long commentId, long userId) throws ServiceException {
         CommentDaoImpl commentDao = CommentDaoImpl.getInstance();
         try {
@@ -85,6 +137,13 @@ public class CommentService {
         }
     }
 
+    /**
+     * Delete user like comment.
+     *
+     * @param commentId the comment id
+     * @param userId    the user id
+     * @throws ServiceException the service exception
+     */
     public void deleteUserLikeComment(long commentId, long userId) throws ServiceException {
         CommentDaoImpl commentDao = CommentDaoImpl.getInstance();
         try {
@@ -95,6 +154,12 @@ public class CommentService {
 
     }
 
+    /**
+     * Remove like comment.
+     *
+     * @param commentId the comment id
+     * @throws ServiceException the service exception
+     */
     public void removeLikeComment(long commentId) throws ServiceException {
         CommentDaoImpl commentDao = CommentDaoImpl.getInstance();
         try {
@@ -104,6 +169,14 @@ public class CommentService {
         }
     }
 
+    /**
+     * Is comment liked already boolean.
+     *
+     * @param commentId the comment id
+     * @param userId    the user id
+     * @return the boolean
+     * @throws ServiceException the service exception
+     */
     public boolean isCommentLikedAlready(long commentId, long userId) throws ServiceException {
         CommentDaoImpl commentDao = CommentDaoImpl.getInstance();
         boolean isLiked = false;
@@ -119,6 +192,13 @@ public class CommentService {
         return isLiked;
     }
 
+    /**
+     * Take comment by id optional.
+     *
+     * @param id the id
+     * @return the optional
+     * @throws ServiceException the service exception
+     */
     public Optional<Comment> takeCommentById(long id) throws ServiceException {
         Optional<Comment> commentOptional;
         CommentDaoImpl commentDao = CommentDaoImpl.getInstance();
@@ -130,6 +210,13 @@ public class CommentService {
         return commentOptional;
     }
 
+    /**
+     * Count life hack comments hash map.
+     *
+     * @param lifeHacks the life hacks
+     * @return the hash map
+     * @throws ServiceException the service exception
+     */
     public HashMap<LifeHack, Integer> countLifeHackComments(List<LifeHack> lifeHacks) throws ServiceException {
         HashMap<LifeHack, Integer> commentCountMap = new HashMap<>();
         for (LifeHack lifehack :
@@ -140,11 +227,19 @@ public class CommentService {
         return commentCountMap;
     }
 
+    /**
+     * Take sort comments list.
+     *
+     * @param sortType   the sort type
+     * @param lifeHackId the life hack id
+     * @return the list
+     * @throws ServiceException the service exception
+     */
     public List<Comment> takeSortComments(SortType sortType, long lifeHackId) throws ServiceException {
         List<Comment> comments = null;
         switch (sortType) {
             case SORT_BY_LIKES:
-                comments = takeCommentsToLifeHackByLikesAmount(lifeHackId);
+                comments = takeCommentsToLifeHackSortByLikesAmount(lifeHackId);
                 break;
             case SORT_BY_DATE:
                 comments = takeCommentsToLifeHack(lifeHackId);
@@ -154,6 +249,14 @@ public class CommentService {
     }
 
 
+    /**
+     * Mark is liked comments hash map.
+     *
+     * @param comments the comments
+     * @param userId   the user id
+     * @return the hash map
+     * @throws ServiceException the service exception
+     */
     public HashMap<Comment, Boolean> markIsLikedComments(List<Comment> comments, long userId) throws ServiceException {
         HashMap<Comment, Boolean> commentsLikesMap = new HashMap<>();
         for (Comment comment : comments) {
@@ -165,6 +268,4 @@ public class CommentService {
         }
         return commentsLikesMap;
     }
-
-
 }

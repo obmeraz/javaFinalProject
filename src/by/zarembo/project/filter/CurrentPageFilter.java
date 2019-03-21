@@ -1,6 +1,6 @@
 package by.zarembo.project.filter;
 
-import by.zarembo.project.command.AttributeConstant;
+import by.zarembo.project.command.CommandConstant;
 import by.zarembo.project.command.PagePath;
 
 import javax.servlet.*;
@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The type Current page filter.
+ */
 @WebFilter(urlPatterns = {"/*"})
 public class CurrentPageFilter implements Filter {
     private static final String REFERER = "referer";
@@ -27,7 +30,7 @@ public class CurrentPageFilter implements Filter {
         if (path == null) {
             path = PagePath.PATH_PAGE_MAIN;
         }
-        session.setAttribute(AttributeConstant.CURRENT_PAGE, path);
+        session.setAttribute(CommandConstant.CURRENT_PAGE, path);
         chain.doFilter(req, resp);
     }
 

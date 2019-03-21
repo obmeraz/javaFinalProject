@@ -1,7 +1,7 @@
 package by.zarembo.project.command.impl.admin;
 
-import by.zarembo.project.command.AttributeConstant;
 import by.zarembo.project.command.Command;
+import by.zarembo.project.command.CommandConstant;
 import by.zarembo.project.command.PagePath;
 import by.zarembo.project.controller.Router;
 import by.zarembo.project.entity.LifeHack;
@@ -13,6 +13,9 @@ import by.zarembo.project.util.LifeHackValidator;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * The type Edit lifehack name command.
+ */
 public class EditLifeHackNameCommand implements Command {
     private static final String NEW_LIFEHACK_NAME = "new_name";
     private LifeHackService lifeHackService = new LifeHackService();
@@ -21,13 +24,13 @@ public class EditLifeHackNameCommand implements Command {
     public Router execute(HttpServletRequest request) throws CommandException {
         Router router = new Router();
         String newName = request.getParameter(NEW_LIFEHACK_NAME);
-        String id = request.getParameter(AttributeConstant.LIFEHACK_ID);
+        String id = request.getParameter(CommandConstant.LIFEHACK_ID);
         if (!LifeHackValidator.validateId(id)) {
             setRouterConfiguration(PagePath.PATH_PAGE_ERROR, "Invalid lifehack id", request, router);
             return router;
         }
         LifeHack lifeHack;
-        String path = String.valueOf(request.getSession().getAttribute(AttributeConstant.CURRENT_PAGE));
+        String path = String.valueOf(request.getSession().getAttribute(CommandConstant.CURRENT_PAGE));
         try {
             if (LifeHackValidator.validateName(newName)) {
                 long lifeHackId = Long.valueOf(id);
@@ -50,7 +53,7 @@ public class EditLifeHackNameCommand implements Command {
     }
 
     private void setRouterConfiguration(String path, String message, HttpServletRequest request, Router router) {
-        request.getSession().setAttribute(AttributeConstant.MESSAGE, message);
+        request.getSession().setAttribute(CommandConstant.MESSAGE, message);
         router.setPagePath(path);
         router.setRedirectRoute();
     }

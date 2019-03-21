@@ -1,8 +1,8 @@
 package by.zarembo.project.dao.impl;
 
 import by.zarembo.project.dao.LifeHackDao;
-import by.zarembo.project.entity.LifeHack;
 import by.zarembo.project.entity.CategoryType;
+import by.zarembo.project.entity.LifeHack;
 import by.zarembo.project.exception.DaoException;
 import by.zarembo.project.pool.ConnectionPool;
 
@@ -11,10 +11,16 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * The type Life hack dao.
+ */
 public class LifeHackDaoImpl implements LifeHackDao {
     private static LifeHackDaoImpl instance = new LifeHackDaoImpl();
 
     private static final String USER_LIKES_COUNT = "user_like_count";
+    private static final String COLUMN_COUNT_LIFEHACKS = "count_lifehacks";
+    private static final String COLUMN_CATEGORY_NAME = "category_name";
+    private static final String COLUMN_LIFEHACK_COUNT = "lifehack_count";
 
     private static final String SQL_SELECT_ALL_LIFEHACKS = "SELECT  u.user_id,role_id,firstname,lastname,nickname,email,password_hash, lifehack_id,author_user_id,lifehack_name," +
             "publication_date,lifehack_content,excerpt,category_id,lifehack_likes_amount,picture FROM lifehacks JOIN users u on lifehacks.author_user_id = u.user_id;";
@@ -64,6 +70,11 @@ public class LifeHackDaoImpl implements LifeHackDao {
 
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static LifeHackDaoImpl getInstance() {
         return instance;
     }
@@ -196,7 +207,7 @@ public class LifeHackDaoImpl implements LifeHackDao {
                 lifeHacks.add(buildEntity(resultSet));
             }
         } catch (SQLException e) {
-            throw new DaoException("SQL exception, can't find lifehack", e);
+            throw new DaoException("SQL exception, can't find lifehacks by category", e);
         } finally {
             ConnectionPool.getInstance().releaseConnection(connection);
         }
@@ -210,12 +221,12 @@ public class LifeHackDaoImpl implements LifeHackDao {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_CATEGORIES)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                CategoryType category = CategoryType.valueOf(resultSet.getString("category_name").toUpperCase());
-                Integer count = resultSet.getInt("count_lifehacks");
+                CategoryType category = CategoryType.valueOf(resultSet.getString(COLUMN_CATEGORY_NAME).toUpperCase());
+                Integer count = resultSet.getInt(COLUMN_COUNT_LIFEHACKS);
                 categoryMap.put(category, count);
             }
         } catch (SQLException e) {
-            throw new DaoException("SQL exception, can't find lifehack", e);
+            throw new DaoException("SQL exception, can't find lifehacks categories", e);
         } finally {
             ConnectionPool.getInstance().releaseConnection(connection);
         }
@@ -235,6 +246,7 @@ public class LifeHackDaoImpl implements LifeHackDao {
         }
     }
 
+    @Override
     public void decrementLifeHackLike(long lifeHackId) throws DaoException {
         Connection connection = ConnectionPool.getInstance().takeConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DECREMENT_LIFEHACK_LIKES)) {
@@ -247,6 +259,7 @@ public class LifeHackDaoImpl implements LifeHackDao {
         }
     }
 
+    @Override
     public void insertUserLikeLifeHack(long lifeHackId, long userId) throws DaoException {
         Connection connection = ConnectionPool.getInstance().takeConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_USER_LIKE_LIFEHACK)) {
@@ -260,6 +273,7 @@ public class LifeHackDaoImpl implements LifeHackDao {
         }
     }
 
+    @Override
     public void deleteUserLikeLifeHack(long lifeHackId, long userId) throws DaoException {
         Connection connection = ConnectionPool.getInstance().takeConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_USER_LIKE_LIFEHACK)) {
@@ -273,6 +287,7 @@ public class LifeHackDaoImpl implements LifeHackDao {
         }
     }
 
+    @Override
     public int isLikedLifeHackAlready(long lifeHackId, long userId) throws DaoException {
         Connection connection = ConnectionPool.getInstance().takeConnection();
         int count;
@@ -290,6 +305,7 @@ public class LifeHackDaoImpl implements LifeHackDao {
         return count;
     }
 
+    @Override
     public int findCategoriesLifeHacksCount(CategoryType categoryType) throws DaoException {
         Connection connection = ConnectionPool.getInstance().takeConnection();
         int count = 0;
@@ -298,10 +314,10 @@ public class LifeHackDaoImpl implements LifeHackDao {
             preparedStatement.setInt(1, categoryId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                count = resultSet.getInt("lifehack_count");
+                count = resultSet.getInt(COLUMN_LIFEHACK_COUNT);
             }
         } catch (SQLException e) {
-            throw new DaoException("SQL exception, can't find lifehack", e);
+            throw new DaoException("SQL exception, can't find categries lifehacks count", e);
         } finally {
             ConnectionPool.getInstance().releaseConnection(connection);
         }

@@ -6,9 +6,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.IOException;
 
+/**
+ * The type Xss attack filter.
+ */
 @WebFilter(filterName = "XssAttackFilter", urlPatterns = {"/*"})
 public class XssAttackFilter implements Filter {
+    /**
+     * The type Filtered request.
+     */
     static class FilteredRequest extends HttpServletRequestWrapper {
+        /**
+         * Instantiates a new Filtered request.
+         *
+         * @param request the request
+         */
         FilteredRequest(ServletRequest request) {
             super((HttpServletRequest) request);
         }
@@ -26,7 +37,6 @@ public class XssAttackFilter implements Filter {
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         FilteredRequest filteredRequest = new FilteredRequest(req);
-        filteredRequest.getParameterMap();
         chain.doFilter(filteredRequest, resp);
     }
 

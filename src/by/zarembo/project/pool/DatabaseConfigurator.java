@@ -10,6 +10,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * The type Database configurator.
+ */
 class DatabaseConfigurator {
     private static Logger logger = LogManager.getLogger();
     private static final String PROPERTIES_FILENAME = "database.properties";
@@ -17,6 +20,12 @@ class DatabaseConfigurator {
     private static final String DATABASE_USER_NAME = "db.user";
     private static final String DATABASE_USER_PASSWORD = "db.password";
 
+    /**
+     * Gets connection from database.
+     *
+     * @return the connection
+     * @throws SQLException the sql exception
+     */
     static Connection getConnection() throws SQLException {
         Properties properties = new Properties();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();

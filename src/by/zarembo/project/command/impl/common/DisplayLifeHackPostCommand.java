@@ -1,7 +1,7 @@
 package by.zarembo.project.command.impl.common;
 
-import by.zarembo.project.command.AttributeConstant;
 import by.zarembo.project.command.Command;
+import by.zarembo.project.command.CommandConstant;
 import by.zarembo.project.command.PagePath;
 import by.zarembo.project.controller.Router;
 import by.zarembo.project.entity.Comment;
@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * The type Display lifehack post command.
+ */
 public class DisplayLifeHackPostCommand implements Command {
     private static final String ATTRIBUTE_COMMENTS = "comments";
     private static final String ATTRIBUTE_LIFEHACK = "lifehack";
@@ -30,10 +33,10 @@ public class DisplayLifeHackPostCommand implements Command {
     public Router execute(HttpServletRequest request) throws CommandException {
         LifeHack lifeHack;
         Router router = new Router();
-        User user = (User) request.getSession().getAttribute(AttributeConstant.USER);
-        String id = request.getParameter(AttributeConstant.LIFEHACK_ID);
+        User user = (User) request.getSession().getAttribute(CommandConstant.USER);
+        String id = request.getParameter(CommandConstant.LIFEHACK_ID);
         if (!LifeHackValidator.validateId(id)) {
-            request.getSession().setAttribute(AttributeConstant.MESSAGE, "Invalid id");
+            request.getSession().setAttribute(CommandConstant.MESSAGE, "Invalid id");
             router.setPagePath(PagePath.PATH_PAGE_ERROR);
             router.setRedirectRoute();
             return router;
@@ -47,7 +50,7 @@ public class DisplayLifeHackPostCommand implements Command {
                 request.setAttribute(ATTRIBUTE_COMMENTS, comments);
                 request.setAttribute(ATTRIBUTE_LIFEHACK, lifeHack);
                 if (user != null) {
-                    if (lifeHackService.isLikedAlready(lifeHackId, user.getUserId())) {
+                    if (lifeHackService.isLifeHackLikedAlready(lifeHackId, user.getUserId())) {
                         request.setAttribute(ATTRIBUTE_IS_LIKED_ALREADY, true);
                     }
                     Map<Comment, Boolean> commentsLikesMap =
@@ -56,7 +59,7 @@ public class DisplayLifeHackPostCommand implements Command {
                 }
                 router.setPagePath(PagePath.PATH_PAGE_LIFEHACK);
             } else {
-                request.getSession().setAttribute(AttributeConstant.MESSAGE, "Can't found lifehack");
+                request.getSession().setAttribute(CommandConstant.MESSAGE, "Can't found lifehack");
                 router.setPagePath(PagePath.PATH_PAGE_ERROR);
                 router.setRedirectRoute();
             }

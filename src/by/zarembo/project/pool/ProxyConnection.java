@@ -5,19 +5,37 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
-public class ProxyConnection implements Connection,Comparable {
+/**
+ * The type Proxy connection.
+ */
+public class ProxyConnection implements Connection, Comparable {
     private Connection connection;
     private long givingConnectionTime;
 
+    /**
+     * Instantiates a new Proxy connection.
+     *
+     * @param connection the connection
+     */
     ProxyConnection(Connection connection) {
         this.connection = connection;
     }
 
-    public long getGivingConnectionTime() {
+    /**
+     * Gets giving connection time.
+     *
+     * @return the giving connection time
+     */
+    long getGivingConnectionTime() {
         return givingConnectionTime;
     }
 
-    public void setGivingConnectionTime(long givingConnectionTime) {
+    /**
+     * Sets giving connection time.
+     *
+     * @param givingConnectionTime the giving connection time
+     */
+    void setGivingConnectionTime(long givingConnectionTime) {
         this.givingConnectionTime = givingConnectionTime;
     }
 
@@ -62,10 +80,15 @@ public class ProxyConnection implements Connection,Comparable {
     }
 
     @Override
-    public void close() throws SQLException {
+    public void close() {
         ConnectionPool.getInstance().releaseConnection(this);
     }
 
+    /**
+     * Real close connection.
+     *
+     * @throws SQLException the sql exception
+     */
     void realCloseConnection() throws SQLException {
         connection.close();
     }

@@ -6,6 +6,9 @@ import javax.servlet.http.Part;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * The type Life hack validator.
+ */
 public class LifeHackValidator {
 
     private static final String REGEX_LIFEHACK_NAME = "^[а-яА-ЯёЁa-zA-Z\\d\\s\\W]{5,100}$";
@@ -14,6 +17,17 @@ public class LifeHackValidator {
     private static final String REGEX_LIFEHACK_ID = "^[0-9]+$";
 
 
+    /**
+     * Validate boolean.
+     *
+     * @param category      the category
+     * @param name          the name
+     * @param content       the content
+     * @param excerpt       the excerpt
+     * @param filepart      the filepart
+     * @param errorMessages the error messages
+     * @return the boolean
+     */
     public static boolean validate(String category, String name, String content,
                                    String excerpt, Part filepart, List<String> errorMessages) {
 
@@ -51,6 +65,12 @@ public class LifeHackValidator {
         return isCorrect;
     }
 
+    /**
+     * Validate name boolean.
+     *
+     * @param name the name
+     * @return the boolean
+     */
     public static boolean validateName(String name) {
         if (name == null || name.isEmpty()) {
             return false;
@@ -58,6 +78,12 @@ public class LifeHackValidator {
         return name.matches(REGEX_LIFEHACK_NAME);
     }
 
+    /**
+     * Validate excerpt boolean.
+     *
+     * @param excerpt the excerpt
+     * @return the boolean
+     */
     public static boolean validateExcerpt(String excerpt) {
         if (excerpt == null || excerpt.isEmpty()) {
             return false;
@@ -65,6 +91,12 @@ public class LifeHackValidator {
         return excerpt.matches(REGEX_LIFEHACK_EXCERPT);
     }
 
+    /**
+     * Validate category boolean.
+     *
+     * @param category the category
+     * @return the boolean
+     */
     public static boolean validateCategory(String category) {
         if (category == null || category.isEmpty()) {
             return false;
@@ -73,6 +105,12 @@ public class LifeHackValidator {
                 .anyMatch(categoryType -> categoryType.toString().equals(category.toUpperCase()));
     }
 
+    /**
+     * Validate content boolean.
+     *
+     * @param content the content
+     * @return the boolean
+     */
     public static boolean validateContent(String content) {
         if (content == null || content.isEmpty()) {
             return false;
@@ -80,6 +118,12 @@ public class LifeHackValidator {
         return content.matches(REGEX_LIFEHACK_CONTENT);
     }
 
+    /**
+     * Validate id boolean.
+     *
+     * @param id the id
+     * @return the boolean
+     */
     public static boolean validateId(String id) {
         if (id == null || id.isEmpty()) {
             return false;

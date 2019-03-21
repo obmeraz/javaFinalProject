@@ -1,7 +1,7 @@
 package by.zarembo.project.command.impl.common;
 
-import by.zarembo.project.command.AttributeConstant;
 import by.zarembo.project.command.Command;
+import by.zarembo.project.command.CommandConstant;
 import by.zarembo.project.command.PagePath;
 import by.zarembo.project.controller.Router;
 import by.zarembo.project.entity.CategoryType;
@@ -12,6 +12,9 @@ import by.zarembo.project.service.LifeHackService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+/**
+ * The type Choose lifehack category command.
+ */
 public class ChooseLifeHackCategoryCommand implements Command {
     private static final String CATEGORY_HASH_MAP = "categoryMap";
     private LifeHackService lifeHackService = new LifeHackService();
@@ -26,7 +29,7 @@ public class ChooseLifeHackCategoryCommand implements Command {
                 router.setPagePath(PagePath.PATH_PAGE_CHOOSE_CATEGORY);
                 request.setAttribute(CATEGORY_HASH_MAP, categoryMap.entrySet());
             } else {
-                request.setAttribute(AttributeConstant.MESSAGE, "No any categories yet");
+                request.setAttribute(CommandConstant.MESSAGE, "No any categories yet");
                 router.setPagePath(PagePath.PATH_PAGE_CHOOSE_CATEGORY);
             }
         } catch (ServiceException e) {

@@ -2,13 +2,19 @@ package by.zarembo.project.tag;
 
 import by.zarembo.project.entity.RoleType;
 
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
-import java.io.IOException;
 
+/**
+ * The type Admin tag.
+ */
 public class AdminTag extends TagSupport {
     private RoleType role;
 
+    /**
+     * Sets role.
+     *
+     * @param role the role
+     */
     public void setRole(RoleType role) {
         this.role = role;
     }
