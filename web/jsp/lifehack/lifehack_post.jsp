@@ -27,23 +27,24 @@
     </title>
 </head>
 <body>
-<script>var lifehack_id =${lifehack.lifehackId}</script>
+<script>var lifehack_id =;${lifehack.lifehackId}</script>
 
 <c:import url="../header.jsp"/>
 <div class="cards-body" style="padding-top: 30px">
     <main role="main" class="container">
         <jsp:useBean id="dateValue" class="java.util.Date"/>
         <div class="conteiner d-flex justify-content-center" style="margin-top: 68px;">
-            <div class="card  text-center">
+            <div class="card">
                 <img src="data:image/jpg;base64,${lifehack.image}" class="card-img-top" alt="...">
                 <div class="card-body" style="width: 830px; height: auto; white-space: normal">
-                    <h5 class="card-title">${lifehack.name} <c:if test="${sessionScope.user.role eq 'ADMIN'}">
+                    <h5 class="card-title text-center">${lifehack.name} <c:if
+                            test="${sessionScope.user.role eq 'ADMIN'}">
                                 <span class="badge badge-danger">  <a class="text-light"
                                                                       href="${pageContext.request.contextPath}/controller?command=edit_lifehack&name=${lifehack.name}&lifehack_id=${lifehack.lifehackId}"
                                                                       style="text-decoration:none">
                                         ${editButton}</a></span>
                     </c:if></h5>
-                    <p class="card-text">${lifehack.content}</p>
+                    <p class="card-text" id="lifehack-post-card">${lifehack.content}</p>
                 </div>
 
                 <div class="card-footer text-muted">
@@ -100,7 +101,7 @@
                       method="POST">
                     <input type="hidden" name="command" value="leave_comment">
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">${commentsName}</label>
+                        <label for="exampleFormControlTextarea1"><h4>${commentsName}</h4></label>
                         <textarea name="comment_content" class="form-control mb-3" id="exampleFormControlTextarea1"
                                   rows="4" maxlength="255"
                                   required></textarea>
@@ -123,14 +124,14 @@
                 </div>
 
                 <c:forEach items="${comments}" var="comment" varStatus="status">
-                    <script>var comment_id =${comment.commentId}</script>
+                    <script>var comment_id =;${comment.commentId}</script>
                     <input type="hidden" id="ppp" value="${comment.commentId}">
                     <jsp:setProperty name="dateValue" property="time"
                                      value="${comment.postDate}"/>
-                    <div class="card" style="margin-top: 35px">
+                    <div class="card" style="margin-top: 35px;margin-left: 135px;">
                         <div class="card-header">
-                            <c:out value="${comment.user.firstName}"/>
-                            <c:out value="${comment.user.lastName}"/>
+                            <b><c:out value="${comment.user.firstName}"/>
+                                <c:out value="${comment.user.lastName}"/></b>
                             <fmt:formatDate value="${dateValue}" pattern="MM/dd/yyyy HH:mm:ss"/>
                             <c:if test="${sessionScope.user.role eq 'ADMIN'}">
                                 <button type="button" class="close" aria-label="Close">
@@ -165,6 +166,18 @@
                         </div>
                     </div>
                 </c:forEach>
+            </div>
+        </c:if>
+        <c:if test="${sessionScope.role eq 'GUEST'}">
+            <div class="alert alert-warning alert-dismissible text-left" role="alert" style="margin-top: 30px">
+                <h4 class="alert-heading">Warning</h4>
+                <hr/>
+                <ul>
+                    Зарегистрируйтесь или войдите,если хотите посмотреть лайфхаки
+                </ul>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         </c:if>
     </main>

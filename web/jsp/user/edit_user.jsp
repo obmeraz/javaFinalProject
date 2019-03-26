@@ -45,39 +45,41 @@
                 <form name="change_password" action="${pageContext.request.contextPath}/controller" method="POST">
                     <input type="hidden" name="command" value="change_password">
                     <div class="form-group">
-                        <label for="login-email">
+                        <label for="edit-previous-password">
                             <h6>
                                 <p class="text-secondary">${previous}</p>
                             </h6>
                         </label>
-                        <input type="password" name="previous_password" class="form-control"
+                        <input type="password" name="previous_password" pattern="^((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15})$" class="form-control"
                                aria-describedby="emailHelp"
                                placeholder="Old"
-                               id="login-email">
+                               id="edit-previous-password">
 
                     </div>
                     <div class="form-group">
-                        <label for="login-password">
+                        <label for="edit-password">
                             <h6>
                                 <p class="text-secondary">${new_password}</p>
                             </h6>
                         </label>
-                        <input type="password" name="new_password" class="form-control" id="login-password"
+                        <input type="password" pattern="^((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15})$" name="new_password" class="form-control" id="edit-password"
                                placeholder="New">
                     </div>
                     <button type="submit" class="btn btn-primary">${submit}</button>
                 </form>
             </c:if>
             <c:if test="${param.edit eq 'email'}">
-                <form name="change_password" action="${pageContext.request.contextPath}/controller" method="POST">
+                <form name="change_email" action="${pageContext.request.contextPath}/controller" method="POST">
                     <input type="hidden" name="command" value="change_email">
                     <div class="form-group">
-                        <label for="login-email">
+                        <label for="new-email">
                             <h6>
                                 <p class="text-secondary">${new_email}</p>
                             </h6>
                         </label>
-                        <input type="email" name="new_email" class="form-control"
+                        <input type="email" maxlength="55"
+                               pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+                               name="new_email" class="form-control"
                                aria-describedby="emailHelp"
                                placeholder="New email"
                                id="new-email" required>

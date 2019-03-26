@@ -30,7 +30,6 @@ import java.util.Optional;
         maxRequestSize = 1024 * 1024 * 5 * 5)
 public class Controller extends HttpServlet {
     private static Logger logger = LogManager.getLogger();
-    //todo don't forget uncomment pattern in html
     private static final String EXCEPTION_PARAMETER = "exception";
 
 

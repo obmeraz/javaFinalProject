@@ -87,7 +87,7 @@
                             <img src="data:image/jpg;base64,${lifehack.image}" class="card-img" alt="...">
                         </div>
                         <div class="col-md-8">
-                            <div class="card-body">
+                            <div class="card-body" id="card-b">
                                 <h5 class="card-title"><a class="nav-link text-dark text-truncate"
                                                           href="${pageContext.request.contextPath}/controller?command=display_lifehack_post&lifehack_id=${lifehack.lifehackId}">
                                         ${lifehack.name}</a></h5>
@@ -110,33 +110,33 @@
                                             <span class="badge badge-success ml-5">
                                                     <a class="text-light"
                                                        href="${pageContext.request.contextPath}/controller?command=display_lifehacks_by_type&type=category&category=${lifehack.category}&current_page=${1}"
-                                                       style="text-decoration:none">
-                                                            <c:choose>
-                                                                <c:when test="${lifehack.category eq 'SPORT'}">
-                                                                    ${sport}
-                                                                </c:when>
-                                                                <c:when test="${lifehack.category eq 'LIFE'}">
-                                                                    ${life}
-                                                                </c:when>
-                                                                <c:when test="${lifehack.category eq 'MOTIVATION'}">
-                                                                    ${motivation}
-                                                                </c:when>
-                                                                <c:when test="${lifehack.category eq 'TECHNOLOGIES'}">
-                                                                    ${technologies}
-                                                                </c:when>
-                                                                <c:when test="${lifehack.category eq 'CINEMA'}">
-                                                                    ${cinema}
-                                                                </c:when>
-                                                                <c:when test="${lifehack.category eq 'NEWS'}">
-                                                                    ${news}
-                                                                </c:when>
-                                                                <c:when test="${lifehack.category eq 'EDUCATION'}">
-                                                                    ${education}
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    ${food}
-                                                                </c:otherwise>
-                                                            </c:choose></a></span>
+                                                       style="text-decoration:none"><c:choose>
+                                                        <c:when test="${lifehack.category eq 'SPORT'}">
+                                                            ${sport}
+                                                        </c:when>
+                                                        <c:when test="${lifehack.category eq 'LIFE'}">
+                                                            ${life}
+                                                        </c:when>
+                                                        <c:when test="${lifehack.category eq 'MOTIVATION'}">
+                                                            ${motivation}
+                                                        </c:when>
+                                                        <c:when test="${lifehack.category eq 'TECHNOLOGIES'}">
+                                                            ${technologies}
+                                                        </c:when>
+                                                        <c:when test="${lifehack.category eq 'CINEMA'}">
+                                                            ${cinema}
+                                                        </c:when>
+                                                        <c:when test="${lifehack.category eq 'NEWS'}">
+                                                            ${news}
+                                                        </c:when>
+                                                        <c:when test="${lifehack.category eq 'EDUCATION'}">
+                                                            ${education}
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            ${food}
+                                                        </c:otherwise>
+                                                    </c:choose></a>
+                                            </span>
                                         </small>
                                     </p>
                                 </div>

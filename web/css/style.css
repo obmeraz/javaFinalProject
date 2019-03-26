@@ -30,8 +30,8 @@
 
 /*Cards with lifehacks*/
 
-.cards-body {
-        background-image: url("/LifehackWeb_war_exploded/img/leaves.png");
+body {
+    background-image: url("/LifehackWeb_war_exploded/img/leaves.png");
 }
 
 .card-body {
@@ -40,6 +40,14 @@
     overflow: hidden;
 }
 
+#card-b {
+    width: 500px;
+}
+
+#lifehack-post-card{
+    text-align: justify;
+    margin-right: 20px;
+}
 .card-img {
     width: 300px;
     height: 150px;
@@ -56,13 +64,17 @@
     margin: auto;
 }
 
+.card-text, .card-title {
+    margin-left: 20px;
+}
+
 .card {
     max-width: 75%;
     border-radius: 20px;
 }
 
 .card-title {
-        text-overflow: ellipsis;
+    text-overflow: ellipsis;
 }
 
 .chapter-header {
@@ -139,6 +151,6 @@ footer {
     width: 550px;
 }
 
-.classlike:hover{
+.classlike:hover {
     cursor: pointer;
 }

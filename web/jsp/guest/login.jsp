@@ -71,7 +71,7 @@
                             </h6>
                         </label>
                         <input type="password" name="password" class="form-control" maxlength="15" id="login-password"
-                               placeholder="Password" required>
+                               placeholder="Password" pattern="^((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15})$" required>
                     </div>
                     <button type="submit" class="btn btn-primary">${submit}</button>
                 </form>

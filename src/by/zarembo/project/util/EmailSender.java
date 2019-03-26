@@ -62,7 +62,7 @@ public class EmailSender {
             switch (emailType) {
                 case SIGN_UP:
                     String hash = user.getPassword();
-                    String address = "http://localhost:8080/LifehackWeb_war_exploded/controller?command=activate_account&hash=";
+                    String address = "http://localhost:8081/LifehackWeb_war_exploded/controller?command=activate_account&hash=";
                     msg = "<a href=\"" + address + hash + "\">here</a>";
                     break;
                 case CHANGE_EMAIL:

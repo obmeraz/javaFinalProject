@@ -105,7 +105,7 @@
                         <label for="inputPassword" class="col-sm-2 col-form-label">${password}</label>
                         <div class="col-sm-10">
                             <input type="password" name="password" pattern="^((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15})$"
-                                   class="form-control" maxlength="256" id="inputPassword" placeholder="Password"
+                                   class="form-control" maxlength="15" id="inputPassword" placeholder="Password"
                                    required>
                             <small id="passwordHelpBlock" class="form-text text-muted">
                                ${password_text}
@@ -116,7 +116,7 @@
                     <div class="form-group row mb-5">
                         <label for="repeatPassword" class="col-sm-2 col-form-label">${repeat_password}</label>
                         <div class="col-sm-10">
-                            <input type="password" maxlength="256" name="repeat_password"
+                            <input type="password" maxlength="15" name="repeat_password"
                                    pattern="^((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15})$"
                                    class="form-control" id="repeatPassword" placeholder="Password" required>
                             <small id="repeatPasswordHelp" class="form-text text-muted">

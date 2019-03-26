@@ -31,16 +31,17 @@
                 <div class="card-body">
                     <h5 class="card-title">${sessionScope.user.firstName} ${sessionScope.user.lastName}</h5>
                     <p>${username}:</p>
-                    <p class="card-text">${sessionScope.user.nickName}</p>
+                    <p class="user-card-text">${sessionScope.user.nickName}</p>
                     <p>${email}:</p>
-                    <p class="card-text">${sessionScope.user.email}</p>
-                    <p class="card-text"><a
+                    <p class="user-card-text">${sessionScope.user.email}</p>
+                    <p class="user-card-text"><a
                             href="${pageContext.request.contextPath}/jsp/user/edit_user.jsp?edit=password"
-                            class="btn btn-danger">${edit_password}</a></p>
-                    <p class="card-text"><a href="${pageContext.request.contextPath}/jsp/user/edit_user.jsp?edit=email"
-                                            class="btn btn-danger">${edit_email}</a></p>
+                            class="btn btn-danger" style="min-width: 124px">${edit_password}</a></p>
+                    <p class="user-card-text"><a
+                            href="${pageContext.request.contextPath}/jsp/user/edit_user.jsp?edit=email"
+                            class="btn btn-danger" style="min-width: 124px">${edit_email}</a></p>
                     <a href="${pageContext.request.contextPath}/controller?command=display_lifehacks_by_type&type=user_like&current_page=1"
-                       class="btn btn-success">${likes}</a>
+                       class="btn btn-success" style="min-width: 124px">${likes}</a>
                 </div>
             </div>
         </div>
