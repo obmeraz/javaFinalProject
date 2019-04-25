@@ -27,7 +27,7 @@
     </title>
 </head>
 <body>
-<script>var lifehack_id =;${lifehack.lifehackId}</script>
+<script>var lifehack_id =${lifehack.lifehackId}</script>
 
 <c:import url="../header.jsp"/>
 <div class="cards-body" style="padding-top: 30px">
@@ -124,7 +124,7 @@
                 </div>
 
                 <c:forEach items="${comments}" var="comment" varStatus="status">
-                    <script>var comment_id =;${comment.commentId}</script>
+                    <script>var comment_id =${comment.commentId}</script>
                     <input type="hidden" id="ppp" value="${comment.commentId}">
                     <jsp:setProperty name="dateValue" property="time"
                                      value="${comment.postDate}"/>
