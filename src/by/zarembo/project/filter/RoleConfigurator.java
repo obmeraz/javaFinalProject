@@ -34,6 +34,7 @@ class RoleConfigurator {
         guestCommands.add(CommandType.DISPLAY_LIFEHACK_POST);
         guestCommands.add(CommandType.ACTIVATE_ACCOUNT);
         guestCommands.add(CommandType.EMPTY_COMMAND);
+        guestCommands.add(CommandType.SEARCH_LIFEHACK);
         rolePrivilegeMap.put(RoleType.GUEST, guestCommands);
     }
 
@@ -51,6 +52,7 @@ class RoleConfigurator {
         userCommands.add(CommandType.CHOOSE_LIFEHACK_CATEGORY);
         userCommands.add(CommandType.EMPTY_COMMAND);
         userCommands.add(CommandType.LOCALE);
+        userCommands.add(CommandType.SEARCH_LIFEHACK);
         rolePrivilegeMap.put(RoleType.USER, userCommands);
     }
 
@@ -81,6 +83,9 @@ class RoleConfigurator {
         adminCommands.add(CommandType.LOCALE);
         adminCommands.add(CommandType.EMPTY_COMMAND);
         adminCommands.add(CommandType.EDIT_LIFEHACK);
+        adminCommands.add(CommandType.SEARCH_LIFEHACK);
+        adminCommands.add(CommandType.EXPORT_TO_JSON);
+        adminCommands.add(CommandType.IMPORT_FROM_JSON);
         rolePrivilegeMap.put(RoleType.ADMIN, adminCommands);
     }
 

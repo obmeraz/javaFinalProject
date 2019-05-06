@@ -10,24 +10,16 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-/**
- * The type Database configurator.
- */
 class DatabaseConfigurator {
+    private static final Properties properties;
     private static Logger logger = LogManager.getLogger();
     private static final String PROPERTIES_FILENAME = "database.properties";
     private static final String DATABASE_URL = "db.url";
     private static final String DATABASE_USER_NAME = "db.user";
     private static final String DATABASE_USER_PASSWORD = "db.password";
 
-    /**
-     * Gets connection from database.
-     *
-     * @return the connection
-     * @throws SQLException the sql exception
-     */
-    static Connection getConnection() throws SQLException {
-        Properties properties = new Properties();
+    static {
+        properties = new Properties();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream propertiesFile = classLoader.getResourceAsStream(PROPERTIES_FILENAME);
         if (propertiesFile == null) {
@@ -51,6 +43,9 @@ class DatabaseConfigurator {
             logger.fatal("Database properties file hasn't right properties");
             throw new RuntimeException("Database properties file hasn't right properties");
         }
+    }
+
+    static Connection getConnection() throws SQLException {
         String url = properties.getProperty(DATABASE_URL);
         String user = properties.getProperty(DATABASE_USER_NAME);
         String pass = properties.getProperty(DATABASE_USER_PASSWORD);

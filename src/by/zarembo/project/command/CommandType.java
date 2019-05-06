@@ -2,10 +2,7 @@ package by.zarembo.project.command;
 
 import by.zarembo.project.command.impl.EmptyCommand;
 import by.zarembo.project.command.impl.admin.*;
-import by.zarembo.project.command.impl.common.ChooseLifeHackCategoryCommand;
-import by.zarembo.project.command.impl.common.DisplayLifeHackPostCommand;
-import by.zarembo.project.command.impl.common.DisplayLifeHacksByTypeCommand;
-import by.zarembo.project.command.impl.common.LocaleCommand;
+import by.zarembo.project.command.impl.common.*;
 import by.zarembo.project.command.impl.guest.ActivateAccountCommand;
 import by.zarembo.project.command.impl.guest.LogInCommand;
 import by.zarembo.project.command.impl.guest.SignUpCommand;
@@ -123,6 +120,10 @@ public enum CommandType {
      * The Empty command.
      */
     EMPTY_COMMAND(new EmptyCommand()),
+
+    SEARCH_LIFEHACK(new FindLifeHacksCommand()),
+    EXPORT_TO_JSON(new LifeHackJsonExportCommand()),
+    IMPORT_FROM_JSON(new LifeJackImportFromJsonCommand()),
     /**
      * The Locale.
      */

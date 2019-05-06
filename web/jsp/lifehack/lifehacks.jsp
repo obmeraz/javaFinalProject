@@ -37,6 +37,10 @@
                 ${fresh}
             </c:when>
 
+            <c:when test="${requestScope.type eq 'search'}">
+                Поиск по "${criteria}"
+            </c:when>
+
             <c:when test="${requestScope.type eq 'popular'}">
                 ${popular}
             </c:when>
@@ -79,6 +83,15 @@
 </div>
 <div class="cards-body" style="padding-top: 30px">
     <main role="main" class="container">
+        <c:if test="${not empty searchMessage}">
+
+
+                        <h3>${searchMessage}</h3>
+
+
+            </div>
+            <c:set var="searchMessage" value="" scope="session"/>
+        </c:if>
         <c:forEach items="${lifehacks}" var="lifehack" varStatus="status">
             <div class="cards">
                 <div class="card mb-4 ">
@@ -148,7 +161,9 @@
         </c:forEach>
     </main>
 </div>
-<c:import url="../pagination.jsp"/>
+<c:if test="${requestScope.type ne 'search'}">
+    <c:import url="../pagination.jsp"/>
+</c:if>
 <c:import url="../footer.jsp"/>
 </body>
 </html>

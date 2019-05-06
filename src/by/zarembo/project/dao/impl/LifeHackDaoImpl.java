@@ -66,6 +66,8 @@ public class LifeHackDaoImpl implements LifeHackDao {
 
     private static final String SQL_SELECT_USER_LIKES_LIFEHACKS = "SELECT count(user_id) as user_like_count FROM user_like_lifehacks WHERE user_id=? and lifehack_id=?;";
 
+    private static final String SQL_SELECT_FIND_LIFEHACKS_BY_CRITERIA = "SELECT  u.user_id,role_id,firstname,lastname,nickname,email,password_hash, lifehack_id,author_user_id,lifehack_name,publication_date,lifehack_content,excerpt,category_id,lifehack_likes_amount,picture FROM lifehacks JOIN users u on lifehacks.author_user_id = u.user_id WHERE lifehack_name like ?";
+
     private LifeHackDaoImpl() {
 
     }
@@ -101,8 +103,13 @@ public class LifeHackDaoImpl implements LifeHackDao {
         Connection connection = ConnectionPool.getInstance().takeConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_NEW_LIFEHACK)) {
             setPreparedStatement(preparedStatement, entity);
-            InputStream targetStream = new ByteArrayInputStream(entity.getImageBytes());
-            preparedStatement.setBlob(7, targetStream);
+            if (entity.getImageBytes() == null) {
+                String image = entity.getImage();
+                preparedStatement.setBytes(7, entity.getImage().getBytes());
+            } else {
+                InputStream targetStream = new ByteArrayInputStream(entity.getImageBytes());
+                preparedStatement.setBlob(7, targetStream);
+            }
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows == 0) {
                 throw new DaoException("SQL exception, affected rows 0");
@@ -322,6 +329,23 @@ public class LifeHackDaoImpl implements LifeHackDao {
             ConnectionPool.getInstance().releaseConnection(connection);
         }
         return count;
+    }
+
+    public List<LifeHack> findLifeHacksByCriteria(String searchCriteria) throws DaoException {
+        Connection connection = ConnectionPool.getInstance().takeConnection();
+        List<LifeHack> lifeHacks = new ArrayList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_FIND_LIFEHACKS_BY_CRITERIA)) {
+            preparedStatement.setString(1, "%" + searchCriteria + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                lifeHacks.add(buildEntity(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            ConnectionPool.getInstance().releaseConnection(connection);
+        }
+        return lifeHacks;
     }
 }
 

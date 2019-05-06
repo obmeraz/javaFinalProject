@@ -27,7 +27,7 @@
     </title>
 </head>
 <body>
-<script>var lifehack_id =${lifehack.lifehackId}</script>
+<script>var lifehack_id =;${lifehack.lifehackId}</script>
 
 <c:import url="../header.jsp"/>
 <div class="cards-body" style="padding-top: 30px">
@@ -43,6 +43,10 @@
                                                                       href="${pageContext.request.contextPath}/controller?command=edit_lifehack&name=${lifehack.name}&lifehack_id=${lifehack.lifehackId}"
                                                                       style="text-decoration:none">
                                         ${editButton}</a></span>
+                        <span class="badge badge-warning">  <a class="text-light"
+                                                              href="${pageContext.request.contextPath}/controller?command=export_to_json&id=${lifehack.lifehackId}"
+                                                              style="text-decoration:none">
+                                Export json</a></span>
                     </c:if></h5>
                     <p class="card-text" id="lifehack-post-card">${lifehack.content}</p>
                 </div>
@@ -124,7 +128,7 @@
                 </div>
 
                 <c:forEach items="${comments}" var="comment" varStatus="status">
-                    <script>var comment_id =${comment.commentId}</script>
+                    <script>var comment_id =;${comment.commentId}</script>
                     <input type="hidden" id="ppp" value="${comment.commentId}">
                     <jsp:setProperty name="dateValue" property="time"
                                      value="${comment.postDate}"/>

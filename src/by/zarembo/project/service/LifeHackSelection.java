@@ -19,5 +19,7 @@ public enum LifeHackSelection {
     /**
      * User like life hack selection.
      */
-    USER_LIKE
+    USER_LIKE,
+
+    SEARCH
 }

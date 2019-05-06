@@ -7,13 +7,16 @@ import by.zarembo.project.entity.LifeHack;
 import by.zarembo.project.entity.User;
 import by.zarembo.project.exception.DaoException;
 import by.zarembo.project.exception.ServiceException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.Part;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -416,5 +419,31 @@ public class LifeHackService {
             numberOfPages++;
         }
         return numberOfPages;
+    }
+
+    public List<LifeHack> findByCriteria(String criteria) throws ServiceException {
+        LifeHackDaoImpl lifeHackDao = LifeHackDaoImpl.getInstance();
+        List<LifeHack> lifeHacks;
+        try {
+            lifeHacks = lifeHackDao.findLifeHacksByCriteria(criteria);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return lifeHacks;
+    }
+
+    public String exportToJson(LifeHack lifeHack) throws ServiceException {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        CharsetEncoder encoder = Charset.forName("UTF-8").newEncoder();
+        String jsonStr ;
+        try (/*FileWriter writer = new FileWriter("D:\\EpamFinal\\javaFinalProject\\web\\export\\" + lifeHack.getLifehackId() + ".json"*/
+                BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("D:\\EpamFinal\\javaFinalProject\\web\\export\\" + lifeHack.getLifehackId() + ".json"), encoder))) {
+            gson.toJson(lifeHack, out);
+            jsonStr = gson.toJson(lifeHack);
+            logger.info(jsonStr);
+        } catch (IOException e) {
+            throw new ServiceException(e);
+        }
+        return jsonStr.replaceAll("(\\R)|(\\\\r\\\\n)","<br>");
     }
 }

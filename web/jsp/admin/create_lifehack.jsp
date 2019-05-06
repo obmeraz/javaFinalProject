@@ -106,6 +106,14 @@
         </div>
     </main>
 </div>
+<div class="import d-flex justify-content-center">
+    <form action="${pageContext.request.contextPath}/controller" method="POST" enctype="multipart/form-data">
+        <h4>Import from json</h4>
+        <input type="hidden" name="command" value="import_from_json">
+        <input type="file" name="json" class="form-control-file" id="fromJson">
+        <button class="btn btn-danger mt-3" id="btn" type="submit">Import</button>
+    </form>
+</div>
 
 <c:import url="../footer.jsp"/>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/script.js"></script>

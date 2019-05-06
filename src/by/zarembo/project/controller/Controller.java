@@ -24,10 +24,7 @@ import java.util.Optional;
  * The type Controller.
  */
 @WebServlet("/controller")
-@MultipartConfig(location = "d:/tmp",
-        fileSizeThreshold = 1024 * 1024,
-        maxFileSize = 1024 * 1024 * 5,
-        maxRequestSize = 1024 * 1024 * 5 * 5)
+@MultipartConfig
 public class Controller extends HttpServlet {
     private static Logger logger = LogManager.getLogger();
     private static final String EXCEPTION_PARAMETER = "exception";
@@ -63,7 +60,7 @@ public class Controller extends HttpServlet {
             logger.error("Catch exception in controller", e);
             router.setPagePath(PagePath.PATH_PAGE_ERROR);
             request.getSession().setAttribute(EXCEPTION_PARAMETER, e);
-            response.sendRedirect(request.getContextPath() + router.getPagePath());
+            response.sendRedirect(router.getPagePath());
         }
     }
 
